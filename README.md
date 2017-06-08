@@ -1,4 +1,10 @@
 # ROS Configuration Repo
-All important ROS .launch files, .msg files and ros packages as git submodules.
+This respository includes
+* ROS .launch files
+* ROS .msg files
+* ROS packages as git submodules.
 
-Only feature branches. Push to master is not allowed! Use pull requests!
+Some conventions:
+* only feature branches
+* push to master is not allowed
+* use pull requests
