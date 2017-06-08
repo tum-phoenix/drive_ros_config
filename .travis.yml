@@ -20,7 +20,7 @@
 #
 # There are two variables you may want to change:
 #   - ROS_DISTRO (default is kinectic). Note that packages must be available for
-#     ubuntu 16.04 trusty.
+#     ubuntu 14.04 trusty.
 #   - ROSINSTALL_FILE (default is dependencies.rosinstall inside the repo
 #     root). This should list all necessary repositories in wstool format (see
 #     the ros wiki). If the file does not exists then nothing happens.
@@ -42,8 +42,8 @@
 
 ################################################################################
 
-# Use ubuntu xinetic (16.04) with sudo privileges.
-dist: xenial
+# Use ubuntu trusty (14.04) with sudo privileges.
+dist: trusty
 sudo: required
 language:
   - generic
