@@ -1,3 +1,6 @@
+# Minimum version required
+cmake_minimum_required(VERSION 2.8.3)
+
 # Get the information about this package's buildtime dependencies
 find_package(catkin REQUIRED
              COMPONENTS std_msgs)
