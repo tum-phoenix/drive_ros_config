@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/tum-phoenix/drive_ros_config.svg?branch=master)](https://travis-ci.org/tum-phoenix/drive_ros_config)
+[![Build Status](https://travis-ci.org/tum-phoenix/drive_ros_config.svg?branch=imaging)](https://travis-ci.org/tum-phoenix/drive_ros_config)
 
 # ROS Configuration Repo
 This respository includes
