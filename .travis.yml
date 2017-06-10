@@ -12,7 +12,7 @@ env:
     - ros_release_name: kinetic
     - ubuntu_version_name: xenial
     - used_modules: check_build #check_cache,code_style_check,check_deb_make,codecov_tool
-    - remote_shell_script: 'https://github.com/tum-phoenix/drive_ros_config/blob/imaging/.travis-build.sh'
+    - remote_shell_script: 'https://raw.githubusercontent.com/tum-phoenix/drive_ros_config/imaging/.travis-build.sh'
 
 script:
   - curl -s "$( echo "$remote_shell_script" | sed 's/#/%23/g' )" | bash -x /dev/stdin "$toolset_branch" $server_type $used_modules
