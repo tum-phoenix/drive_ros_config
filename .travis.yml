@@ -19,15 +19,15 @@ before_install:
   - docker pull $docker_image
   
 script:
-  - |
-    docker run -w "$docker_user_home/sr-build-tools/ansible" -v $TRAVIS_BUILD_DIR:/host$TRAVIS_BUILD_DIR 
-    $docker_image 
-    bash -c "wget http://www.ximea.com/downloads/recent/XIMEA_Linux_SP.tgz; 
-             tar xzf XIMEA_Linux_SP.tgz; 
-             cd package; 
-             sed -i -e 's/udevadm control --reload/echo removed command/g' scripts/install_steps; 
-             sed -i -e 's/read choice/echo automatic approval/g' scripts/install_steps; 
-             ./install; 
-             cd ..;" 
+  - >
+      docker run -w "$docker_user_home/sr-build-tools/ansible" -v $TRAVIS_BUILD_DIR:/host$TRAVIS_BUILD_DIR 
+      $docker_image 
+      bash -c "wget http://www.ximea.com/downloads/recent/XIMEA_Linux_SP.tgz; 
+               tar xzf XIMEA_Linux_SP.tgz; 
+               cd package; 
+               sed -i -e 's/udevadm control --reload/echo removed command/g' scripts/install_steps; 
+               sed -i -e 's/read choice/echo automatic approval/g' scripts/install_steps; 
+              ./install; 
+              cd ..;" 
   
   #git pull && git checkout $toolset_branch && sudo PYTHONUNBUFFERED=1 ansible-playbook -v -i \"localhost,\" -c local docker_site.yml --tags \"travis,$tags_list\" -e \"$extra_variables\" "
