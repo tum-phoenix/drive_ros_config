@@ -20,5 +20,5 @@ export extra_variables="codecov_secure=$CODECOV_TOKEN github_login=$GITHUB_LOGIN
 
 sudo docker pull $docker_image
 export extra_variables="$extra_variables travis_repo_dir=/host$TRAVIS_BUILD_DIR  travis_is_pull_request=$TRAVIS_PULL_REQUEST"
-sudo docker run -w "$docker_user_home/sr-build-tools/ansible" -v $TRAVIS_BUILD_DIR:/host$TRAVIS_BUILD_DIR $docker_image  bash -c "git pull && git checkout $toolset_branch && sudo PYTHONUNBUFFERED=1 ansible-playbook -v -i \"localhost,\" -c local docker_site.yml --tags \"travis,$tags_list\" -e \"$extra_variables\" "
+sudo docker run -w "$docker_user_home/sr-build-tools/ansible" -v $TRAVIS_BUILD_DIR:/host$TRAVIS_BUILD_DIR $docker_image  bash -c "wget http://www.ximea.com/downloads/recent/XIMEA_Linux_SP.tgz; tar xzf XIMEA_Linux_SP.tgz; cd package; ./install; cd ..; git pull && git checkout $toolset_branch && sudo PYTHONUNBUFFERED=1 ansible-playbook -v -i \"localhost,\" -c local docker_site.yml --tags \"travis,$tags_list\" -e \"$extra_variables\" "
 
