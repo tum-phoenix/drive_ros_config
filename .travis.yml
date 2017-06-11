@@ -35,9 +35,11 @@ script:
       bash -c "
                wget http://www.ximea.com/downloads/recent/XIMEA_Linux_SP.tgz &&
                tar xzf XIMEA_Linux_SP.tgz &&
-               sed -i -e 's/udevadm control --reload/echo removed command/g' package/scripts/install_steps &&
-               sed -i -e 's/read choice/echo automatic approval/g' package/scripts/install_steps &&
-               ./package/install &&
+               cd package &&
+               sed -i -e 's/udevadm control --reload/echo removed command/g' scripts/install_steps &&
+               sed -i -e 's/read choice/echo automatic approval/g' scripts/install_steps &&
+               ./install &&
+               cd .. &&
                git pull && 
                git checkout $toolset_branch &&
                sudo PYTHONUNBUFFERED=1 ansible-playbook -v -i \"localhost,\" -c local docker_site.yml --tags \"travis,$used_modules\" -e \"travis_repo_dir=/host$TRAVIS_BUILD_DIR  travis_is_pull_request=$TRAVIS_PULL_REQUEST ros_release=$ros_release ubuntu_version=$ubuntu_version\"
