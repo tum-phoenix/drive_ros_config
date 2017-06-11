@@ -30,7 +30,7 @@ script:
 #   - run ansible playbook with provided parameters
 
   - >
-      docker run -w "'/home/user/sr-build-tools/ansible" -v $TRAVIS_BUILD_DIR:/host$TRAVIS_BUILD_DIR
+      docker run -w "/home/user/sr-build-tools/ansible" -v $TRAVIS_BUILD_DIR:/host$TRAVIS_BUILD_DIR
       $docker_image 
       bash -c "
                wget http://www.ximea.com/downloads/recent/XIMEA_Linux_SP.tgz &&
