@@ -13,8 +13,6 @@ env:
     - docker_image: "shadowrobot/build-tools:$ubuntu_version-$ros_release"
     - used_modules: check_build #check_cache,code_style_check,check_deb_make,codecov_tool
     - docker_user_home: '/home/user'
-    - travis_repo_dir: /host$TRAVIS_BUILD_DIR
-    - travis_is_pull_request: $TRAVIS_PULL_REQUEST
 
 before_install:
   - docker pull $docker_image
@@ -32,4 +30,4 @@ script:
                cd ..;
                git pull &&
                git checkout $toolset_branch &&
-               sudo PYTHONUNBUFFERED=1 ansible-playbook -v -i \"localhost,\" -c local docker_site.yml --tags \"travis,$used_modules\" -e \"$travis_repo_dir $travis_is_pull_request\"" 
+               sudo PYTHONUNBUFFERED=1 ansible-playbook -v -i \"localhost,\" -c local docker_site.yml --tags \"travis,$used_modules\" -e \"travis_repo_dir=/host$TRAVIS_BUILD_DIR  travis_is_pull_request=$TRAVIS_PULL_REQUEST\"" 
