@@ -18,27 +18,27 @@ before_install:
   - docker pull $docker_image
   
 script:
+# run docker image from shadowrobot in ansible working directory and and with travis build dir as mounted volume
+# bash command to run in docker container consists of
+#   - download ximea drivers  
+#   - extract ximea drivers
+#   - remove udevadm command in ximea install script (because it does not work in the docker container)
+#   - auto approval of firewire camera warning in ximea install script
+#   - install ximea drivers
+#   - pull latest ansible playbook files from sr robotics
+#   - checkout correct branch
+#   - run ansible playbook with provided parameters
+
   - >
-      # run docker in ansible working directory and and with travis build dir as mounted volume 
       docker run -w "'/home/user/sr-build-tools/ansible" -v $TRAVIS_BUILD_DIR:/host$TRAVIS_BUILD_DIR
-      # docker image to run
       $docker_image 
-      # bash command in docker to run
       bash -c "
-               # download ximea drivers
                wget http://www.ximea.com/downloads/recent/XIMEA_Linux_SP.tgz &&
-               # extract ximea drivers
                tar xzf XIMEA_Linux_SP.tgz &&
-               # remove udevadm command in ximea install script (because it does not work in the docker container)
                sed -i -e 's/udevadm control --reload/echo removed command/g' package/scripts/install_steps &&
-               # auto approval of firewire camera warning in ximea install script
                sed -i -e 's/read choice/echo automatic approval/g' package/scripts/install_steps &&
-               # install ximea drivers
                ./package/install &&
-               # pull latest ansible playbook files from sr robotics 
                git pull && 
-               # checkout correct branch
                git checkout $toolset_branch &&
-               # run ansible playbook with provided parameters
                sudo PYTHONUNBUFFERED=1 ansible-playbook -v -i \"localhost,\" -c local docker_site.yml --tags \"travis,$used_modules\" -e \"travis_repo_dir=/host$TRAVIS_BUILD_DIR  travis_is_pull_request=$TRAVIS_PULL_REQUEST ros_release=$ros_release ubuntu_version=$ubuntu_version\"
               " 
