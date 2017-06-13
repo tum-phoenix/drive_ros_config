@@ -1,0 +1,6 @@
+[submodule "modules/drive_ros_mavlink_device"]
+	path = modules/drive_ros_mavlink_device
+	url = https://github.com/tum-phoenix/drive_ros_mavlink_device
+[submodule "modules/drive_ros_mavlink_CC2016"]
+	path = modules/drive_ros_mavlink_CC2016
+	url = https://github.com/tum-phoenix/drive_ros_mavlink_CC2016
