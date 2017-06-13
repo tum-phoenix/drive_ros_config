@@ -8,11 +8,39 @@ services:
 env:
   global:
     - toolset_branch: master
-    - server_type: travis
-    - ros_release_name: kinetic
-    - ubuntu_version_name: xenial
+    - ros_release: kinetic
+    - ubuntu_version: xenial
+    - docker_image: "shadowrobot/build-tools:$ubuntu_version-$ros_release"
     - used_modules: check_build #check_cache,code_style_check,check_deb_make,codecov_tool
-    - remote_shell_script: 'https://raw.githubusercontent.com/shadow-robot/sr-build-tools/$toolset_branch/bin/sr-run-ci-build.sh'
 
+before_install:
+  # pull docker image from shadowrobot
+  - docker pull $docker_image
+  
 script:
-  - curl -s "$( echo "$remote_shell_script" | sed 's/#/%23/g' )" | bash -x /dev/stdin "$toolset_branch" $server_type $used_modules
+# run docker image from shadowrobot in ansible working directory and and with travis build dir as mounted volume
+# bash command to run in docker container consists of
+#   - download ximea drivers  
+#   - extract ximea drivers
+#   - remove udevadm command in ximea install script (because it does not work in the docker container)
+#   - auto approval of firewire camera warning in ximea install script
+#   - install ximea drivers
+#   - pull latest ansible playbook files from sr robotics
+#   - checkout correct branch
+#   - run ansible playbook with provided parameters
+
+  - >
+      docker run -w "/home/user/sr-build-tools/ansible" -v $TRAVIS_BUILD_DIR:/host$TRAVIS_BUILD_DIR
+      $docker_image 
+      bash -c "
+               wget http://www.ximea.com/downloads/recent/XIMEA_Linux_SP.tgz &&
+               tar xzf XIMEA_Linux_SP.tgz &&
+               cd package &&
+               sed -i -e 's/udevadm control --reload/echo removed command/g' scripts/install_steps &&
+               sed -i -e 's/read choice/echo automatic approval/g' scripts/install_steps &&
+               ./install &&
+               cd .. &&
+               git pull && 
+               git checkout $toolset_branch &&
+               sudo PYTHONUNBUFFERED=1 ansible-playbook -v -i \"localhost,\" -c local docker_site.yml --tags \"travis,$used_modules\" -e \"travis_repo_dir=/host$TRAVIS_BUILD_DIR  travis_is_pull_request=$TRAVIS_PULL_REQUEST ros_release=$ros_release ubuntu_version=$ubuntu_version\"
+              " 
