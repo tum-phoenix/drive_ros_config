@@ -17,6 +17,7 @@ before_install:
   # pull docker image from shadowrobot
   - docker pull $docker_image
   
+
 script:
 # run docker image from shadowrobot in ansible working directory and and with travis build dir as mounted volume
 # bash command to run in docker container consists of
