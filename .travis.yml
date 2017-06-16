@@ -11,7 +11,7 @@ env:
     - ros_release: kinetic
     - ubuntu_version: xenial
     - docker_image: "shadowrobot/build-tools:$ubuntu_version-$ros_release"
-    - used_modules: check_build #check_cache,code_style_check,check_deb_make,codecov_tool
+    - used_modules: check_build,codecov_tool #check_cache,code_style_check,check_deb_make
 
 before_install:
   # pull docker image from shadowrobot
@@ -42,5 +42,5 @@ script:
                cd .. &&
                git pull && 
                git checkout $toolset_branch &&
-               sudo PYTHONUNBUFFERED=1 ansible-playbook -v -i \"localhost,\" -c local docker_site.yml --tags \"travis,$used_modules\" -e \"travis_repo_dir=/host$TRAVIS_BUILD_DIR  travis_is_pull_request=$TRAVIS_PULL_REQUEST ros_release=$ros_release ubuntu_version=$ubuntu_version\"
+               sudo PYTHONUNBUFFERED=1 ansible-playbook -v -i \"localhost,\" -c local docker_site.yml --tags \"travis,$used_modules\" -e \"travis_repo_dir=/host$TRAVIS_BUILD_DIR  travis_is_pull_request=$TRAVIS_PULL_REQUEST ros_release=$ros_release ubuntu_version=$ubuntu_version codecov_secure=3a2e32b0-8e30-46df-b459-8b1c992366e3\"
               " 
