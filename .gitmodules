@@ -1,0 +1,6 @@
+[submodule "modules/hokuyo_node"]
+	path = modules/hokuyo_node
+	url = https://github.com/ros-drivers/hokuyo_node.git
+[submodule "modules/driver_common"]
+	path = modules/driver_common
+	url = https://github.com/ros-drivers/driver_common.git
