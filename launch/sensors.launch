@@ -4,9 +4,9 @@
 <include file="$(find ximea_camera)/launch/ximea_camera.launch" ns="camera" />
  
 <!-- LIDAR Node -->
-<include file="$(find hokuyo_node)/launch/hokuyo_phoenix.launch" ns="lidar" />
+<include file="$(find hokuyo_node)/hokuyo_phoenix.launch" ns="lidar" />
 
 <!--- Mavlink Nodes -->
-<include file="$(find mavlink_phoenix)/launch/mavlink_phoenix.launch" ns="mavlink" />
+<include file="$(find mavlink_phoenix)/mavlink_phoenix.launch" ns="mavlink" />
 
 </launch>
