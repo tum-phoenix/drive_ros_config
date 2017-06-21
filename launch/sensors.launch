@@ -1,12 +1,15 @@
 <launch>
 
-<!-- Camera Node -->
-<include file="$(find ximea_camera)/launch/ximea_camera.launch" ns="camera" />
- 
-<!-- LIDAR Node -->
-<include file="$(find hokuyo_node)/hokuyo_phoenix.launch" ns="lidar" />
+    <!-- Camera Node -->
+    <include file="$(find ximea_camera)/launch/ximea_camera.launch" ns="camera" />
+     
+    <!-- LIDAR Node -->
+    <include file="$(find hokuyo_node)/hokuyo_phoenix.launch" ns="lidar" />
 
-<!--- Mavlink Nodes -->
-<include file="$(find mavlink_phoenix)/mavlink_phoenix.launch" ns="mavlink" />
+    <!--- Mavlink Nodes -->
+    <include file="$(find mavlink_phoenix)/mavlink_phoenix.launch" ns="mavlink" />
+
+    <!-- Car CC2017 specific -->
+    <include file="./car_cc2017.launch" />
 
 </launch>
