@@ -10,3 +10,6 @@
 [submodule "modules/drive_ros_hokuyo"]
 	path = modules/drive_ros_hokuyo
 	url = https://github.com/tum-phoenix/drive_ros_hokuyo
+[submodule "modules/drive_ros_ximea_importer"]
+	path = modules/drive_ros_ximea_importer
+	url = https://github.com/tum-phoenix/drive_ros_ximea_importer.git
