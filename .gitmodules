@@ -13,3 +13,6 @@
 [submodule "modules/drive_ros_ximea_importer"]
 	path = modules/drive_ros_ximea_importer
 	url = https://github.com/tum-phoenix/drive_ros_ximea_importer.git
+[submodule "modules/drive_ros_mavlink_test"]
+	path = modules/drive_ros_mavlink_test
+	url = https://github.com/tum-phoenix/drive_ros_mavlink_test
