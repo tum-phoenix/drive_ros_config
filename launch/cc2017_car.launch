@@ -1,0 +1,23 @@
+<launch>
+    <!-- vehicle name e.g. cc2017_car -->
+    <arg name="vehicle" default="cc2017_car"/>
+
+    <!-- Geometry TFs -->
+    <!-- Usage: static_transform_publisher x y z yaw pitch roll frame_id child_frame_id  period(milliseconds) -->
+
+    <!-- FRONT AXIS -->
+    <node name="tf_front_axis_middle" pkg="tf" type="static_transform_publisher" args="0.2001 0 0 0 0 0 /rear_axis_middle /front_axis_middle 100"/>
+
+    <!-- LIDAR SENSOR -->
+    <node name="tf_laser" pkg="tf" type="static_transform_publisher" args="0.06505 -0.05 0.0625 0 0 0 /rear_axis_middle /laser 100"/>
+
+    <!-- PEPPERLFUCHS TO THE SIDE -->
+    <node name="tf_side_lightswitch" pkg="tf" type="static_transform_publisher" args="0.062524 -0.0942 0.020885 4.712 0 0 /rear_axis_middle /side_lightswitch 100"/>
+
+    <!-- INERTIAL MEASUREMENT UNIT -->
+    <node name="tf_imu" pkg="tf" type="static_transform_publisher" args="0.0711 0.0530 0.0416 0 0 0 /rear_axis_middle /imu 100"/>
+
+    <!-- XIMEA CAMERA -->
+    <node name="tf_camera" pkg="tf" type="static_transform_publisher" args="-0.0005 0 0.283925 0 0.5411 0 /rear_axis_middle /cam_$(arg vehicle) 100"/>
+
+</launch>

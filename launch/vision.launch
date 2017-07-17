@@ -1,5 +1,8 @@
 <launch>
-    <arg name="camera_image_topic" default="/camera1/image_raw"/>
+    <!-- vehicle name e.g. cc2017_car -->
+    <arg name="vehicle" default="cc2017_car"/>
+
+    <arg name="camera_image_topic" default="/cam_$(arg vehicle)/image_raw"/>
     <arg name="warped_image_topic" default="/warped_image"/>
     <!-- debug: undistored camera image (not warped) -->
     <arg name="undistored_image_topic" default="/undistorted_image"/>
