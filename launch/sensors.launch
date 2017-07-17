@@ -4,7 +4,9 @@
     <arg name="vehicle" value="cc2017_car"/>
     
     <!-- Camera Node -->
-    <include file="$(find ximea_camera)/launch/ximea_camera.launch" ns="camera" />
+    <include file="$(find ximea_camera)/launch/ximea_camera.launch" ns="camera">
+        <arg name="vehicle" value="$(arg vehicle)" />
+    </include>
      
     <!-- LIDAR Node -->
     <include file="$(find hokuyo_node)/launch/hokuyo_phoenix.launch" ns="lidar" />
@@ -15,6 +17,6 @@
     <!-- Vehicle specific -->
     <include file="$(arg vehicle).launch">
         <arg name="vehicle" value="$(arg vehicle)" />
-    <include/>
+    </include>
 
 </launch>
