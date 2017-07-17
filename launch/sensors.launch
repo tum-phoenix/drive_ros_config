@@ -15,8 +15,6 @@
     <include file="$(find mavlink_phoenix)/launch/mavlink_phoenix.launch" ns="mavlink" />
 
     <!-- Vehicle specific -->
-    <include file="$(arg vehicle).launch">
-        <arg name="vehicle" value="$(arg vehicle)" />
-    </include>
+    <include file="$(arg vehicle).launch" />
 
 </launch>
