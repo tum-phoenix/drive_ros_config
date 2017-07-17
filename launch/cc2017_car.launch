@@ -1,7 +1,4 @@
 <launch>
-    <!-- vehicle name e.g. cc2017_car -->
-    <arg name="vehicle" default="cc2017_car"/>
-
     <!-- Geometry TFs -->
     <!-- Usage: static_transform_publisher x y z yaw pitch roll frame_id child_frame_id  period(milliseconds) -->
 
@@ -18,6 +15,6 @@
     <node name="tf_imu" pkg="tf" type="static_transform_publisher" args="0.0711 0.0530 0.0416 0 0 0 /rear_axis_middle /imu 100"/>
 
     <!-- XIMEA CAMERA -->
-    <node name="tf_camera" pkg="tf" type="static_transform_publisher" args="-0.0005 0 0.283925 0 0.5411 0 /rear_axis_middle /cam_$(arg vehicle) 100"/>
+    <node name="tf_camera" pkg="tf" type="static_transform_publisher" args="-0.0005 0 0.283925 0 0.5411 0 /rear_axis_middle /camera 100"/>
 
 </launch>

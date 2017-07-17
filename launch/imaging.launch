@@ -15,24 +15,18 @@
 
     <!-- Vision Node
     <group unless="$(arg use_vision_nodelet)">
-        <include file="vision.launch">
-            <arg name="vehicle" value="$(arg vehicle)"/>
-        <include/>
+        <include file="vision.launch"/>
     </group>
     -->
 
     <!-- Vision Nodelet
     <group if="$(arg use_vision_nodelet)">
-        <include file="vision_nodelet.launch">
-            <arg name="vehicle" value="$(arg vehicle)"/>
-        <include/>
+        <include file="vision_nodelet.launch"/>
     </group>
     -->
 
 
     <!-- Vehicle specific -->
-    <include file="$(arg vehicle).launch">
-        <arg name="vehicle" value="$(arg vehicle)"/>
-    </include>
+    <include file="$(arg vehicle).launch" />
 
 </launch>
