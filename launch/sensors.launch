@@ -11,9 +11,6 @@
     <!-- LIDAR Node -->
     <include file="$(find hokuyo_node)/launch/hokuyo_phoenix.launch" ns="lidar" />
 
-    <!--- Mavlink Nodes -->
-    <include file="$(find mavlink_phoenix)/launch/mavlink_phoenix.launch" ns="mavlink" />
-
     <!-- Vehicle specific -->
     <include file="$(arg vehicle).launch" />
 
