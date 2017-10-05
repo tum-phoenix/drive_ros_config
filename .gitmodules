@@ -4,3 +4,6 @@
 [submodule "modules/drive_ros_ximea_importer"]
 	path = modules/drive_ros_ximea_importer
 	url = https://github.com/tum-phoenix/drive_ros_ximea_importer
+[submodule "modules/drive_ros_camera_homography"]
+	path = modules/drive_ros_camera_homography
+	url = https://github.com/tum-phoenix/drive_ros_camera_homography
