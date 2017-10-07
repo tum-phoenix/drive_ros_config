@@ -17,6 +17,7 @@ env:
 before_install:
   # pull docker image from shadowrobot
   - docker pull $docker_image
+  - CI_ENV=`bash <(curl -s https://codecov.io/env)`
   
 script:
 # run docker image from shadowrobot in ansible working directory and and with travis build dir as mounted volume
@@ -31,7 +32,7 @@ script:
 #   - run ansible playbook with provided parameters
 
   - >
-      docker run -w "/home/user/sr-build-tools/ansible" -v $TRAVIS_BUILD_DIR:/host$TRAVIS_BUILD_DIR
+      docker run $CI_ENV -w "/home/user/sr-build-tools/ansible" -v $TRAVIS_BUILD_DIR:/host$TRAVIS_BUILD_DIR
       $docker_image 
       bash -c "
                wget -q http://www.ximea.com/downloads/recent/XIMEA_Linux_SP.tgz &&
