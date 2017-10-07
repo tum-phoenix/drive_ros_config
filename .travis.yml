@@ -49,4 +49,4 @@ script:
                sudo cp /home/user/workspace/codecoverage/coverage.cpp.xml /host$TRAVIS_BUILD_DIR | true &&
                sudo cp /home/user/workspace/codecoverage/coverage.python.xml /host$TRAVIS_BUILD_DIR | true
               " && cat $TRAVIS_BUILD_DIR/coverage.cpp.xml &&
-      bash <(curl -s https://codecov.io/bash) -f $TRAVIS_BUILD_DIR/coverage.cpp.xml
+      bash <(curl -s https://codecov.io/bash) -f $TRAVIS_BUILD_DIR/coverage.cpp.xml -f $TRAVIS_BUILD_DIR/coverage.python.xml
