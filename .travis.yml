@@ -31,10 +31,11 @@ script:
 #   - checkout correct branch
 #   - run ansible playbook with provided parameters
   - >
-      ci_env=`bash <(curl -s https://codecov.io/env)` &&
+      ci_env=`bash <(curl -s https://codecov.io/env)` && echo $ci_env &&
       docker run $ci_env -w "/home/user/sr-build-tools/ansible" -v $TRAVIS_BUILD_DIR:/host$TRAVIS_BUILD_DIR
       $docker_image 
       bash -c "
+               echo $CI_BUILD_URL && echo $CODECOV_ENV
                wget -q http://www.ximea.com/downloads/recent/XIMEA_Linux_SP.tgz &&
                tar xzf XIMEA_Linux_SP.tgz &&
                cd package &&
