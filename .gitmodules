@@ -1,0 +1,3 @@
+[submodule "modules/drive_ros_image_recognition"]
+	path = modules/drive_ros_image_recognition
+	url = https://github.com/tum-phoenix/drive_ros_image_recognition
