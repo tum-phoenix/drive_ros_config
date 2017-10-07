@@ -11,7 +11,7 @@ env:
     - ros_release: kinetic
     - ubuntu_version: xenial
     - docker_image: "shadowrobot/build-tools:$ubuntu_version-$ros_release"
-    - used_modules: check_build,software_tests,codecov_tool #check_cache,code_style_check,check_deb_make,codecov_tool
+    - used_modules: check_build,software_tests,code_coverage #check_cache,code_style_check,check_deb_make,codecov_tool
     # available modules: https://github.com/shadow-robot/sr-build-tools/blob/master/ansible/roles/ci/doc/modules.md
 
 before_install:
@@ -31,8 +31,8 @@ script:
 #   - checkout correct branch
 #   - run ansible playbook with provided parameters
   - >
-      ci_env=`bash <(curl -s https://codecov.io/env)` &&
-      docker run $ci_env -w "/home/user/sr-build-tools/ansible" -v $TRAVIS_BUILD_DIR:/host$TRAVIS_BUILD_DIR
+      docker run -w "/home/user/sr-build-tools/ansible" 
+      -v $TRAVIS_BUILD_DIR:/host$TRAVIS_BUILD_DIR
       $docker_image 
       bash -c "
                wget -q http://www.ximea.com/downloads/recent/XIMEA_Linux_SP.tgz &&
@@ -44,6 +44,9 @@ script:
                cd .. &&
                git pull && 
                git checkout $toolset_branch &&
-               sudo PYTHONUNBUFFERED=1 ansible-playbook -v -i \"localhost,\" -c local docker_site.yml --tags \"travis,$used_modules\" -e \"CODECOV_ENV=$CODECOV_ENV CODECOV_TOKEN=$CODECOV_TOKEN CODECOV_URL=$CODECOV_URL CODECOV_SLUG=$CODECOV_SLUG VCS_COMMIT_ID=$VCS_COMMIT_ID VCS_BRANCH_NAME=$VCS_BRANCH_NAME VCS_PULL_REQUEST=$VCS_PULL_REQUEST VCS_SLUG=$VCS_SLUG VCS_TAG=$VCS_TAG CI_BUILD_URL=$CI_BUILD_URL CI_BUILD_ID=$CI_BUILD_ID CI_JOB_ID=$CI_JOB_ID CI=$CI TRAVIS=$TRAVIS SHIPPABLE=$SHIPPABLE TRAVIS_BRANCH=$TRAVIS_BRANCH TRAVIS_COMMIT=$TRAVIS_COMMIT TRAVIS_JOB_NUMBER=$TRAVIS_JOB_NUMBER TRAVIS_PULL_REQUEST=$TRAVIS_PULL_REQUEST TRAVIS_JOB_ID=$TRAVIS_JOB_ID TRAVIS_REPO_SLUG=$TRAVIS_REPO_SLUG TRAVIS_TAG=$TRAVIS_TAG TRAVIS_OS_NAME=$TRAVIS_OS_NAME codecov_secure=$CODECOV_TOKEN travis_repo_dir=/host$TRAVIS_BUILD_DIR  travis_is_pull_request=$TRAVIS_PULL_REQUEST ros_release=$ros_release ubuntu_version=$ubuntu_version\" &&
-               cat /home/user/workspace/codecoverage/coverage.cpp.xml
-              "
+               sudo PYTHONUNBUFFERED=1 ansible-playbook -v -i \"localhost,\" -c local docker_site.yml --tags \"travis,$used_modules\" -e \"travis_repo_dir=/host$TRAVIS_BUILD_DIR  travis_is_pull_request=$TRAVIS_PULL_REQUEST ros_release=$ros_release ubuntu_version=$ubuntu_version\" &&
+               echo $code_coverage_results_dir &&
+               cp /home/user/workspace/codecoverage/coverage.cpp.xml /host$TRAVIS_BUILD_DIR &&
+               cp /home/user/workspace/codecoverage/coverage.python.xml /host$TRAVIS_BUILD_DIR
+              " && echo $TRAVIS_BUILD_DIR/coverage.cpp.xml &&
+      bash <(curl -s https://codecov.io/bash) -f $TRAVIS_BUILD_DIR/coverage.cpp.xml -f $TRAVIS_BUILD_DIR/coverage.python.xml
