@@ -4,9 +4,6 @@
 [submodule "modules/drive_ros_mavlink_CC2016"]
 	path = modules/drive_ros_mavlink_CC2016
 	url = https://github.com/tum-phoenix/drive_ros_mavlink_CC2016
-[submodule "modules/drive_ros_driver_common"]
-	path = modules/drive_ros_driver_common
-	url = https://github.com/ros-drivers/driver_common
 [submodule "modules/drive_ros_hokuyo"]
 	path = modules/drive_ros_hokuyo
 	url = https://github.com/tum-phoenix/drive_ros_hokuyo
@@ -16,3 +13,6 @@
 [submodule "modules/drive_ros_mavlink_test"]
 	path = modules/drive_ros_mavlink_test
 	url = https://github.com/tum-phoenix/drive_ros_mavlink_test
+[submodule "modules/drive_ros_driver_common"]
+	path = modules/drive_ros_driver_common
+	url = https://github.com/tum-phoenix/drive_ros_driver_common
