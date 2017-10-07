@@ -13,13 +13,14 @@ env:
     - docker_image: "shadowrobot/build-tools:$ubuntu_version-$ros_release"
     - used_modules: check_build,software_tests,codecov_tool #check_cache,code_style_check,check_deb_make,codecov_tool
     # available modules: https://github.com/shadow-robot/sr-build-tools/blob/master/ansible/roles/ci/doc/modules.md
-    - ci_env: "bash <(curl -s https://codecov.io/env)"
 
 before_install:
   # pull docker image from shadowrobot
   - docker pull $docker_image
   
 script:
+# detect CI environment for codecov tool
+  - ci_env=`bash <(curl -s https://codecov.io/env)`
 # run docker image from shadowrobot in ansible working directory and and with travis build dir as mounted volume
 # bash command to run in docker container consists of
 #   - download ximea drivers  
@@ -30,7 +31,6 @@ script:
 #   - pull latest ansible playbook files from sr robotics
 #   - checkout correct branch
 #   - run ansible playbook with provided parameters
-
   - >
       docker run $ci_env -w "/home/user/sr-build-tools/ansible" -v $TRAVIS_BUILD_DIR:/host$TRAVIS_BUILD_DIR
       $docker_image 
