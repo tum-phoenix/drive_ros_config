@@ -16,7 +16,7 @@ env:
 
 before_install:
   # pull docker image from shadowrobot
-  #- docker pull $docker_image
+  - docker pull $docker_image
   
 script:
 # get CI-environment for codecov
@@ -31,4 +31,20 @@ script:
 #   - checkout correct branch
 #   - run ansible playbook with provided parameters
   - >
-      ci_env=`bash <(curl -s https://codecov.io/env)` && echo $ci_env && echo $TRAVIS_JOB_NUMBER && echo $CI_BUILD_ID && echo test
+      ci_env=`bash <(curl -s https://codecov.io/env)` &&
+      docker run $ci_env -w "/home/user/sr-build-tools/ansible" -v $TRAVIS_BUILD_DIR:/host$TRAVIS_BUILD_DIR
+      $docker_image 
+      bash -c "
+               echo $CI && echo $TRAVIS &&
+               wget -q http://www.ximea.com/downloads/recent/XIMEA_Linux_SP.tgz &&
+               tar xzf XIMEA_Linux_SP.tgz &&
+               cd package &&
+               sed -i -e 's/udevadm control --reload/echo removed command/g' scripts/install_steps &&
+               sed -i -e 's/read choice/echo automatic approval/g' scripts/install_steps &&
+               ./install &&
+               cd .. &&
+               git pull && 
+               git checkout $toolset_branch &&
+               sudo PYTHONUNBUFFERED=1 ansible-playbook -v -i \"localhost,\" -c local docker_site.yml --tags \"travis,$used_modules\" -e \"codecov_secure=$CODECOV_TOKEN travis_repo_dir=/host$TRAVIS_BUILD_DIR  travis_is_pull_request=$TRAVIS_PULL_REQUEST ros_release=$ros_release ubuntu_version=$ubuntu_version\" &&
+               cat /home/user/workspace/codecoverage/coverage.cpp.xml
+              "
