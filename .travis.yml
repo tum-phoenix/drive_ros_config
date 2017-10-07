@@ -44,7 +44,6 @@ script:
                cd .. &&
                git pull && 
                git checkout $toolset_branch &&
-               ci_env=`bash <(curl -s https://codecov.io/env)` &&
                sudo PYTHONUNBUFFERED=1 ansible-playbook -v -i \"localhost,\" -c local docker_site.yml --tags \"travis,$used_modules\" -e \"CODECOV_ENV=$CODECOV_ENV CODECOV_TOKEN=$CODECOV_TOKEN CODECOV_URL=$CODECOV_URL CODECOV_SLUG=$CODECOV_SLUG VCS_COMMIT_ID=$VCS_COMMIT_ID VCS_BRANCH_NAME=$VCS_BRANCH_NAME VCS_PULL_REQUEST=$VCS_PULL_REQUEST VCS_SLUG=$VCS_SLUG VCS_TAG=$VCS_TAG CI_BUILD_URL=$CI_BUILD_URL CI_BUILD_ID=$CI_BUILD_ID CI_JOB_ID=$CI_JOB_ID CI=$CI TRAVIS=$TRAVIS SHIPPABLE=$SHIPPABLE TRAVIS_BRANCH=$TRAVIS_BRANCH TRAVIS_COMMIT=$TRAVIS_COMMIT TRAVIS_JOB_NUMBER=$TRAVIS_JOB_NUMBER TRAVIS_PULL_REQUEST=$TRAVIS_PULL_REQUEST TRAVIS_JOB_ID=$TRAVIS_JOB_ID TRAVIS_REPO_SLUG=$TRAVIS_REPO_SLUG TRAVIS_TAG=$TRAVIS_TAG TRAVIS_OS_NAME=$TRAVIS_OS_NAME codecov_secure=$CODECOV_TOKEN travis_repo_dir=/host$TRAVIS_BUILD_DIR  travis_is_pull_request=$TRAVIS_PULL_REQUEST ros_release=$ros_release ubuntu_version=$ubuntu_version\" &&
                cat /home/user/workspace/codecoverage/coverage.cpp.xml
               "
