@@ -34,7 +34,7 @@ script:
       docker run -w "/home/user/sr-build-tools/ansible" -v $TRAVIS_BUILD_DIR:/host$TRAVIS_BUILD_DIR
       $docker_image 
       bash -c "
-               wget http://www.ximea.com/downloads/recent/XIMEA_Linux_SP.tgz &&
+               wget -q http://www.ximea.com/downloads/recent/XIMEA_Linux_SP.tgz &&
                tar xzf XIMEA_Linux_SP.tgz &&
                cd package &&
                sed -i -e 's/udevadm control --reload/echo removed command/g' scripts/install_steps &&
@@ -43,5 +43,6 @@ script:
                cd .. &&
                git pull && 
                git checkout $toolset_branch &&
-               sudo PYTHONUNBUFFERED=1 ansible-playbook -v -i \"localhost,\" -c local docker_site.yml --tags \"travis,$used_modules\" -e \"codecov_secure=$CODECOV_TOKEN travis_repo_dir=/host$TRAVIS_BUILD_DIR  travis_is_pull_request=$TRAVIS_PULL_REQUEST ros_release=$ros_release ubuntu_version=$ubuntu_version\"
+               sudo PYTHONUNBUFFERED=1 ansible-playbook -v -i \"localhost,\" -c local docker_site.yml --tags \"travis,$used_modules\" -e \"codecov_secure=$CODECOV_TOKEN travis_repo_dir=/host$TRAVIS_BUILD_DIR  travis_is_pull_request=$TRAVIS_PULL_REQUEST ros_release=$ros_release ubuntu_version=$ubuntu_version\" &&
+               cat /home/user/workspace/codecoverage/coverage.cpp.xml
               " 
