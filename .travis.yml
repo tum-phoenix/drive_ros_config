@@ -31,4 +31,4 @@ script:
 #   - checkout correct branch
 #   - run ansible playbook with provided parameters
   - >
-      ci_env=`bash <(curl -s https://codecov.io/env)` && echo $ci_env && echo $CODECOV_ENV && echo $CI_BUILD_ID && echo test
+      ci_env=`bash <(curl -s https://codecov.io/env)` && echo $ci_env && echo $TRAVIS_JOB_NUMBER && echo $CI_BUILD_ID && echo test
