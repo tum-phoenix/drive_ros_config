@@ -44,5 +44,5 @@ script:
                git pull && 
                git checkout $toolset_branch &&
                sudo PYTHONUNBUFFERED=1 ansible-playbook -v -i \"localhost,\" -c local docker_site.yml --tags \"travis,$used_modules\" -e \"codecov_secure=$CODECOV_TOKEN travis_repo_dir=/host$TRAVIS_BUILD_DIR  travis_is_pull_request=$TRAVIS_PULL_REQUEST ros_release=$ros_release ubuntu_version=$ubuntu_version\" &&
-		cat /home/user/workspace/codecoverage/coverage.cpp.xml
+               cat /home/user/workspace/codecoverage/coverage.cpp.xml
               " 
