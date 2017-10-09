@@ -11,17 +11,17 @@ env:
     - ros_release: kinetic
     - ubuntu_version: xenial
     - docker_image: "shadowrobot/build-tools:$ubuntu_version-$ros_release"
-    - used_modules: check_build,software_tests,code_coverage #check_cache,code_style_check,check_deb_make,codecov_tool
+    - used_modules: check_build,software_tests#check_cache,code_style_check,check_deb_make,codecov_tool
     # available modules: https://github.com/shadow-robot/sr-build-tools/blob/master/ansible/roles/ci/doc/modules.md
 
 before_install:
   # pull docker image from shadowrobot
   - docker pull $docker_image
-  
+
 script:
 # run docker image from shadowrobot in ansible working directory and and with travis build dir as mounted volume
 # bash command to run in docker container consists of
-#   - download ximea drivers  
+#   - download ximea drivers
 #   - extract ximea drivers
 #   - remove udevadm command in ximea install script (because it does not work in the docker container)
 #   - auto approval of firewire camera warning in ximea install script
@@ -29,12 +29,9 @@ script:
 #   - pull latest ansible playbook files from sr robotics
 #   - checkout correct branch
 #   - run ansible playbook with provided parameters
-#   - copy code coverage results to shared folder (so that we can access it outside of docker)
-
-# upload codecoverage results
   - >
       docker run -w "/home/user/sr-build-tools/ansible" -v $TRAVIS_BUILD_DIR:/host$TRAVIS_BUILD_DIR
-      $docker_image 
+      $docker_image
       bash -c "
                wget -q http://www.ximea.com/downloads/recent/XIMEA_Linux_SP.tgz &&
                tar xzf XIMEA_Linux_SP.tgz &&
@@ -43,10 +40,7 @@ script:
                sed -i -e 's/read choice/echo automatic approval/g' scripts/install_steps &&
                ./install &&
                cd .. &&
-               git pull && 
+               git pull &&
                git checkout $toolset_branch &&
-               sudo PYTHONUNBUFFERED=1 ansible-playbook -v -i \"localhost,\" -c local docker_site.yml --tags \"travis,$used_modules\" -e \"travis_repo_dir=/host$TRAVIS_BUILD_DIR  travis_is_pull_request=$TRAVIS_PULL_REQUEST ros_release=$ros_release ubuntu_version=$ubuntu_version\" &&
-               sudo cp /home/user/workspace/codecoverage/coverage.cpp.xml /host$TRAVIS_BUILD_DIR | true &&
-               sudo cp /home/user/workspace/codecoverage/coverage.python.xml /host$TRAVIS_BUILD_DIR | true
-              " && cat $TRAVIS_BUILD_DIR/coverage.cpp.xml &&
-      bash <(curl -s https://codecov.io/bash) -f $TRAVIS_BUILD_DIR/coverage.cpp.xml -f $TRAVIS_BUILD_DIR/coverage.python.xml
+               sudo PYTHONUNBUFFERED=1 ansible-playbook -v -i \"localhost,\" -c local docker_site.yml --tags \"travis,$used_modules\" -e \"travis_repo_dir=/host$TRAVIS_BUILD_DIR  travis_is_pull_request=$TRAVIS_PULL_REQUEST ros_release=$ros_release ubuntu_version=$ubuntu_version\"
+              "
