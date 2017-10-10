@@ -34,7 +34,7 @@ script:
       docker run -w "/home/user/sr-build-tools/ansible" -v $TRAVIS_BUILD_DIR:/host$TRAVIS_BUILD_DIR
       $docker_image 
       bash -c "
-               wget http://www.ximea.com/downloads/recent/XIMEA_Linux_SP.tgz &&
+               wget -q http://www.ximea.com/downloads/recent/XIMEA_Linux_SP.tgz &&
                tar xzf XIMEA_Linux_SP.tgz &&
                cd package &&
                sed -i -e 's/udevadm control --reload/echo removed command/g' scripts/install_steps &&

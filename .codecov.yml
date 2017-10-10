@@ -1,3 +1,0 @@
-# fix path in Travis-CI
-fixes:
-- "src/host/home/travis/build/tum-phoenix/drive_ros_config/::"
