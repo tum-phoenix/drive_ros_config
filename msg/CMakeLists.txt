@@ -12,6 +12,7 @@ find_package(catkin REQUIRED COMPONENTS
 add_message_files(
     FILES
     RoadLane.msg
+    Homography.msg
     )
 
 generate_messages(
