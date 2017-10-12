@@ -7,3 +7,6 @@
 [submodule "modules/drive_ros_camera_homography"]
 	path = modules/drive_ros_camera_homography
 	url = https://github.com/tum-phoenix/drive_ros_camera_homography
+[submodule "modules/drive_ros_msgs"]
+	path = modules/drive_ros_msgs
+	url = https://github.com/tum-phoenix/drive_ros_msgs

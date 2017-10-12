@@ -1,2 +1,0 @@
-std_msgs/Float64MultiArray world2cam
-std_msgs/Float64MultiArray cam2world
