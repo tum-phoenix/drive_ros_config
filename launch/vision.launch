@@ -7,18 +7,18 @@
     <!-- road trajectory -->
     <arg name="road_trajectory_topic" default="/road_trajectory"/>
 
-    <include file="$(find drive_ros_image_recognition)/launch/warp_image.launch">
+    <include file="$(find drive_ros_image_recognition)/warp_image.launch">
         <arg name="camera_image_topic" value="$(arg camera_image_topic)" />
         <arg name="warped_image_topic" value="$(arg warped_image_topic)" />
         <arg name="undistort_out" value="$(arg undistored_image_topic)" />
     </include>
 
-    <include file="$(find drive_ros_image_recognition)/launch/road_detection.launch">
+    <include file="$(find drive_ros_image_recognition)/road_detection.launch">
         <arg name="incoming_image" value="$(arg warped_image_topic)" />
         <arg name="road_trajectory_topic" value="$(arg road_trajectory_topic)" />
     </include>
 
-    <include file="$(find drive_ros_image_recognition)/launch/street_crossing.launch">
+    <include file="$(find drive_ros_image_recognition)/street_crossing.launch">
         <arg name="incoming_image" value="$(arg warped_image_topic)" />
     </include>
 </launch>
