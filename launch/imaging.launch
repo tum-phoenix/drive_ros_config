@@ -5,26 +5,14 @@
     <!-- vehicle name e.g. cc2017_car -->
     <arg name="vehicle" value="cc2017_car"/>
 
-    <!-- flag if we should use vision via nodelet or not
-    <arg name="use_vision_nodelet" value="false"/> -->
-
     <!-- Camera Node -->
     <include file="$(find ximea_camera)/launch/ximea_camera.launch" ns="camera">
         <arg name="vehicle" value="$(arg vehicle)"/>
     </include>
 
     <!-- Vision Node
-    <group unless="$(arg use_vision_nodelet)">
-        <include file="vision.launch"/>
-    </group>
+    <include file="vision.launch"/>
     -->
-
-    <!-- Vision Nodelet
-    <group if="$(arg use_vision_nodelet)">
-        <include file="vision_nodelet.launch"/>
-    </group>
-    -->
-
 
     <!-- Vehicle specific -->
     <include file="$(arg vehicle).launch" />
