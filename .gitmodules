@@ -16,3 +16,6 @@
 [submodule "modules/drive_ros_driver_common"]
 	path = modules/drive_ros_driver_common
 	url = https://github.com/tum-phoenix/drive_ros_driver_common
+[submodule "modules/drive_ros_msgs"]
+	path = modules/drive_ros_msgs
+	url = https://github.com/tum-phoenix/drive_ros_msgs
