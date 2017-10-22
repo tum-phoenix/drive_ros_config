@@ -1,0 +1,36 @@
+<launch>
+
+    <!-- TOP LEVEL LAUNCH FILE -->
+
+    <!-- vehicle name e.g. cc2017_car -->
+    <arg name="vehicle" value="cc2017_car"/>
+
+    <!-- vehicle name e.g. cc2017_car -->
+    <arg name="vehicle" value="cc2017_car"/>
+
+    <!-- Camera Node -->
+    <!--    <include file="$(find ximea_camera)/launch/ximea_camera.launch" ns="camera">
+        <arg name="vehicle" value="$(arg vehicle)" />
+    </include>-->
+
+    <!-- Vehicle specific -->
+    <include file="$(arg vehicle).launch" />
+
+    <arg name="scan_topic" value="/scan"/>
+
+    <!-- LIDAR Node -->
+    <include file="$(find hokuyo_node)/launch/hokuyo_phoenix.launch" ns="lidar">
+        <arg name="scan_topic" value="$(arg scan_topic)"/>
+    </include>
+
+    <!-- Obstacle from LIDAR -->
+    <include file="$(find laserscan_obstacle_generator)/launch/laserscan_obstacle_generator.launch" ns="lidar">
+        <arg name="scan_topic" value="$(arg scan_topic)"/>
+    </include>
+
+    <!--- Mavlink Nodes -->
+    <!--    <include file="$(find mavlink_phoenix)/launch/mavlink_CC2016.launch" ns="mavlink" />
+    <include file="$(find mavlink_phoenix_device)/launch/mavlink_device.launch" ns="mavlink" />-->
+
+
+</launch>
