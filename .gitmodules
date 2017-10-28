@@ -10,3 +10,9 @@
 [submodule "modules/drive_ros_imu_odo_odometry"]
 	path = modules/drive_ros_imu_odo_odometry
 	url = https://github.com/tum-phoenix/drive_ros_imu_odo_odometry
+[submodule "modules/drive_ros_mavlink_device"]
+	path = modules/drive_ros_mavlink_device
+	url = https://github.com/tum-phoenix/drive_ros_mavlink_device
+[submodule "modules/drive_ros_mavlink_test"]
+	path = modules/drive_ros_mavlink_test
+	url = https://github.com/tum-phoenix/drive_ros_mavlink_test
