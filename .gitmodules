@@ -18,4 +18,4 @@
 	url = https://github.com/tum-phoenix/drive_ros_mavlink_test
 [submodule "lib/kalman"]
 	path = lib/kalman
-	url = https://github.com/mherb/kalman
+	url = https://github.com/tum-phoenix/kalman
