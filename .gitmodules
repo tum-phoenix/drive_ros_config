@@ -16,3 +16,6 @@
 [submodule "modules/drive_ros_mavlink_test"]
 	path = modules/drive_ros_mavlink_test
 	url = https://github.com/tum-phoenix/drive_ros_mavlink_test
+[submodule "lib/kalman"]
+	path = lib/kalman
+	url = https://github.com/mherb/kalman
