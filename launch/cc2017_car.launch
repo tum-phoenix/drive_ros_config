@@ -3,6 +3,9 @@
     <!-- Geometry TFs -->
     <!-- Usage: static_transform_publisher x y z yaw pitch roll frame_id child_frame_id  period(milliseconds) -->
 
+    <!-- REAR AXIS -->
+    <node name="tf_rear_axis_middle" pkg="tf" type="static_transform_publisher" args="0 0 0.036 0 0 0 /rear_axis_middle_ground /rear_axis_middle 100"/>
+
     <!-- FRONT AXIS -->
     <node name="tf_front_axis_middle" pkg="tf" type="static_transform_publisher" args="0.2001 0 0 0 0 0 /rear_axis_middle /front_axis_middle 100"/>
 
