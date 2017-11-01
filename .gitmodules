@@ -19,3 +19,6 @@
 [submodule "lib/kalman"]
 	path = lib/kalman
 	url = https://github.com/tum-phoenix/kalman
+[submodule "modules/drive_ros_cc2017_car"]
+	path = modules/drive_ros_cc2017_car
+	url = https://github.com/tum-phoenix/drive_ros_cc2017_car
