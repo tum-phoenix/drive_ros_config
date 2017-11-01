@@ -10,3 +10,6 @@
 [submodule "modules/drive_ros_msgs"]
 	path = modules/drive_ros_msgs
 	url = https://github.com/tum-phoenix/drive_ros_msgs.git
+[submodule "modules/drive_ros_cc2017_car"]
+	path = modules/drive_ros_cc2017_car
+	url = https://github.com/tum-phoenix/drive_ros_cc2017_car
