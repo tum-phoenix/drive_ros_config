@@ -15,6 +15,6 @@
     -->
 
     <!-- Vehicle specific -->
-    <include file="$(arg vehicle).launch" />
+    <include file="$(find drive_ros_cc2017_car)/launch/tf_pub.launch" />
 
 </launch>
