@@ -16,6 +16,6 @@
     <include file="$(find mavlink_phoenix_device)/launch/mavlink_device.launch" ns="mavlink" />
 
     <!-- Vehicle specific -->
-    <include file="$(arg vehicle).launch" />
+    <include file="$(find drive_ros_cc2017_car)/launch/tf_pub.launch" />
 
 </launch>
