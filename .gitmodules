@@ -1,0 +1,15 @@
+[submodule "modules/drive_ros_hokuyo"]
+	path = modules/drive_ros_hokuyo
+	url = https://github.com/tum-phoenix/drive_ros_hokuyo
+[submodule "modules/drive_ros_ximea_importer"]
+	path = modules/drive_ros_ximea_importer
+	url = https://github.com/tum-phoenix/drive_ros_ximea_importer.git
+[submodule "modules/drive_ros_costmap_gen"]
+	path = modules/drive_ros_costmap_gen
+	url = https://github.com/tum-phoenix/drive_ros_costmap_gen
+[submodule "modules/drive_ros_driver_common"]
+	path = modules/drive_ros_driver_common
+	url = https://github.com/tum-phoenix/drive_ros_driver_common
+[submodule "modules/drive_ros_cc2017_car"]
+	path = modules/drive_ros_cc2017_car
+	url = https://github.com/tum-phoenix/drive_ros_cc2017_car
