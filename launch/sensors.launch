@@ -4,7 +4,7 @@
     <arg name="vehicle" value="cc2017_car"/>
 
     <!-- Camera Node -->
-    <include file="$(find ximea_camera)/launch/ximea_camera.launch" ns="camera">
+    <include file="$(find drive_ros_ximea_importer)/launch/ximea_camera.launch" ns="camera">
         <arg name="vehicle" value="$(arg vehicle)" />
     </include>
 
