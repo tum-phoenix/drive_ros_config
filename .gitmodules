@@ -1,0 +1,24 @@
+[submodule "modules/drive_ros_mavlink_device"]
+	path = modules/drive_ros_mavlink_device
+	url = https://github.com/tum-phoenix/drive_ros_mavlink_device
+[submodule "modules/drive_ros_mavlink_CC2016"]
+	path = modules/drive_ros_mavlink_cc2016
+	url = https://github.com/tum-phoenix/drive_ros_mavlink_CC2016
+[submodule "modules/drive_ros_hokuyo"]
+	path = modules/drive_ros_hokuyo
+	url = https://github.com/tum-phoenix/drive_ros_hokuyo
+[submodule "modules/drive_ros_ximea_importer"]
+	path = modules/drive_ros_ximea_importer
+	url = https://github.com/tum-phoenix/drive_ros_ximea_importer.git
+[submodule "modules/drive_ros_mavlink_test"]
+	path = modules/drive_ros_mavlink_test
+	url = https://github.com/tum-phoenix/drive_ros_mavlink_test
+[submodule "modules/drive_ros_driver_common"]
+	path = modules/drive_ros_driver_common
+	url = https://github.com/tum-phoenix/drive_ros_driver_common
+[submodule "modules/drive_ros_msgs"]
+	path = modules/drive_ros_msgs
+	url = https://github.com/tum-phoenix/drive_ros_msgs
+[submodule "modules/drive_ros_cc2017_car"]
+	path = modules/drive_ros_cc2017_car
+	url = https://github.com/tum-phoenix/drive_ros_cc2017_car

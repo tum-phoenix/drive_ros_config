@@ -1,0 +1,21 @@
+<launch>
+
+    <!-- vehicle name e.g. cc2017_car -->
+    <arg name="vehicle" value="cc2017_car"/>
+
+    <!-- Camera Node -->
+    <include file="$(find drive_ros_ximea_importer)/launch/ximea_camera.launch" ns="camera">
+        <arg name="vehicle" value="$(arg vehicle)" />
+    </include>
+
+    <!-- LIDAR Node -->
+    <include file="$(find hokuyo_node)/launch/hokuyo_phoenix.launch" ns="lidar" />
+
+    <!--- Mavlink Nodes -->
+    <include file="$(find mavlink_phoenix)/launch/mavlink_CC2016.launch" ns="mavlink" />
+    <include file="$(find mavlink_phoenix_device)/launch/mavlink_device.launch" ns="mavlink" />
+
+    <!-- Vehicle specific -->
+    <include file="$(find drive_ros_cc2017_car)/launch/tf_pub.launch" />
+
+</launch>
