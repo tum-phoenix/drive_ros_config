@@ -8,11 +8,6 @@
     <!-- vehicle name e.g. cc2017_car -->
     <arg name="vehicle" value="cc2017_car"/>
 
-    <!-- Camera Node -->
-    <!--    <include file="$(find ximea_camera)/launch/ximea_camera.launch" ns="camera">
-        <arg name="vehicle" value="$(arg vehicle)" />
-    </include>-->
-
     <!-- Vehicle specific -->
     <include file="$(find drive_ros_cc2017_car)/launch/tf_pub.launch" />
 
