@@ -1,0 +1,12 @@
+<launch>
+
+    <!-- vehicle name e.g. cc2017_car -->
+    <arg name="vehicle" value="cc2017_car"/>
+
+    <!--- Mavlink Nodes -->
+    <include file="$(find drive_ros_mavlink_cc2016)/launch/mavlink_CC2016.launch" ns="mavlink" />
+
+    <!-- Vehicle specific -->
+    <include file="$(find drive_ros_cc2017_car)/launch/tf_pub.launch" />
+
+</launch>
