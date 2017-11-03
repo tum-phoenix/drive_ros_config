@@ -5,6 +5,8 @@
     <!-- vehicle name e.g. cc2017_car -->
     <arg name="vehicle" value="cc2017_car"/>
 
+
+
     <!-- Camera Node
     <include file="$(find drive_ros_ximea_importer)/launch/ximea_camera.launch" ns="camera">
         <arg name="vehicle" value="$(arg vehicle)"/>
@@ -15,12 +17,19 @@
     -->
 
     <!-- Vehicle specific -->
-    <include file="$(find drive_ros_cc2017_car)/launch/tf_pub.launch" />
+    <include file="$(find drive_ros_cc2017_car)/launch/tf_pub.launch"/>
+
 
     <!-- Mavlink (interface to car electronics) data import -->
-    <include file="$(find drive_ros_mavlink_cc2016)/launch/mavlink_CC2016.launch" />
+    <include file="$(find drive_ros_mavlink_cc2016)/launch/mavlink_CC2016.launch">
+        <!-- forward output to [screen|log] -->
+        <arg name="output" value="log" />
+    </include>
 
     <!-- Ego estimator based on IMU and odometer -->
-    <include file="$(find drive_ros_imu_odo_odometry)/launch/imu_odo_odometry.launch" />
+    <include file="$(find drive_ros_imu_odo_odometry)/launch/imu_odo_odometry.launch" >
+        <!-- forward output to [screen|log] -->
+        <arg name="output" value="log" />
+    </include>
 
 </launch>
