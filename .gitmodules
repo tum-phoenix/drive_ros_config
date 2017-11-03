@@ -13,3 +13,12 @@
 [submodule "modules/drive_ros_cc2017_car"]
 	path = modules/drive_ros_cc2017_car
 	url = https://github.com/tum-phoenix/drive_ros_cc2017_car
+[submodule "modules/drive_ros_imu_odo_odometry"]
+	path = modules/drive_ros_imu_odo_odometry
+	url = https://github.com/tum-phoenix/drive_ros_imu_odo_odometry
+[submodule "modules/drive_ros_mavlink_CC2016"]
+	path = modules/drive_ros_mavlink_cc2016
+	url = https://github.com/tum-phoenix/drive_ros_mavlink_CC2016
+[submodule "lib/kalman"]
+	path = lib/kalman
+	url = https://github.com/tum-phoenix/kalman
