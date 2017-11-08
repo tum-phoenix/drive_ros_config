@@ -24,7 +24,7 @@ catkin_ws/src/drive_ros_config
 ```
 
 # More infos on Git submodules
-Git submodules can be confusing at first. However, there are a very handy tool to assembles on overall system from different modules in different ways.
+Git submodules can be confusing at first. However, they are a very handy tool to assembles on overall system from different modules in different ways.
 
 ## Some ressources on Git submodules
 - [Short Tutorial Video](https://www.youtube.com/watch?v=UQvXst5I41I)
@@ -47,3 +47,5 @@ git submodule deinit .
 git checkout <branch>
 git submodule update --init --recursive
 ```
+### don't use git submodules
+Still not convinced that submodules are cool? Then just don't use this repo and clone all repos manually into your workspace. You can just do everything how you would normally do. Pull, change, commit and push each repositoriy separately. However, then it is your responsiblity to keep everything up to date on your system and consistency to other modules may not be guaranteed.
