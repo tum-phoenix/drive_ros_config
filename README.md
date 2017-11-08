@@ -14,12 +14,12 @@ The folder structure should look like:
 ```
 catkin_ws/src/drive_ros_config
                      /launch
-                         <launch file 1>
-                         <launch file 2>
+                         <launch file A>
+                         <launch file B>
                          ...
                      /modules
-                         <submodule 3>
-                         <submodule 4>
+                         <submodule 1>
+                         <submodule 2>
                          ...
 ```
 
