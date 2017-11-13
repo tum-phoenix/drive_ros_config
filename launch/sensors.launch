@@ -12,8 +12,7 @@
     <include file="$(find hokuyo_node)/launch/hokuyo_phoenix.launch" ns="lidar" />
 
     <!--- Mavlink Nodes -->
-    <include file="$(find mavlink_phoenix)/launch/mavlink_CC2016.launch" ns="mavlink" />
-    <include file="$(find mavlink_phoenix_device)/launch/mavlink_device.launch" ns="mavlink" />
+    <include file="$(find drive_ros_mavlink_device)/launch/mavlink_device.launch" ns="mavlink" />
 
     <!-- Vehicle specific -->
     <include file="$(find drive_ros_cc2017_car)/launch/tf_pub.launch" />
