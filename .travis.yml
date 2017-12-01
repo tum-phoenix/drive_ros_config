@@ -18,11 +18,11 @@ env:
 before_install:
   # pull docker image from shadowrobot
   - docker pull $docker_image
-  
+
 script:
 # run docker image from shadowrobot in ansible working directory and and with travis build dir as mounted volume
 # bash command to run in docker container consists of
-#   - download ximea drivers  
+#   - download ximea drivers
 #   - extract ximea drivers
 #   - remove udevadm command in ximea install script (because it does not work in the docker container)
 #   - auto approval of firewire camera warning in ximea install script
@@ -33,7 +33,7 @@ script:
 
   - >
       docker run -w "/home/user/sr-build-tools/ansible" -v $TRAVIS_BUILD_DIR:/host$TRAVIS_BUILD_DIR
-      $docker_image 
+      $docker_image
       bash -c "
                wget -q http://www.ximea.com/downloads/recent/XIMEA_Linux_SP.tgz &&
                tar xzf XIMEA_Linux_SP.tgz &&
@@ -42,7 +42,7 @@ script:
                sed -i -e 's/read choice/echo automatic approval/g' scripts/install_steps &&
                ./install &&
                cd .. &&
-               git pull && 
+               git pull &&
                git checkout $toolset_branch &&
-               sudo PYTHONUNBUFFERED=1 ansible-playbook -v -i \"localhost,\" -c local docker_site.yml --tags \"travis,$used_modules\" -e \"travis_repo_dir=/host$TRAVIS_BUILD_DIR  travis_is_pull_request=$TRAVIS_PULL_REQUEST ros_release=$ros_release ubuntu_version=$ubuntu_version\"
-              " 
+               sudo PYTHONUNBUFFERED=1 ansible-playbook -v -i \"localhost,\" -c local docker_site.yml --tags \"travis,$used_modules\" -e \"travis_repo_dir=/host$TRAVIS_BUILD_DIR ci=$CI  travis_is_pull_request=$TRAVIS_PULL_REQUEST ros_release=$ros_release ubuntu_version=$ubuntu_version\"
+              "
