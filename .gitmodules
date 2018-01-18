@@ -22,3 +22,6 @@
 [submodule "lib/kalman"]
 	path = lib/kalman
 	url = https://github.com/tum-phoenix/kalman
+[submodule "drive_ros_road_viz"]
+	path = drive_ros_road_viz
+	url = https://github.com/tum-phoenix/drive_ros_road_viz
