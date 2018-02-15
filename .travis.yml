@@ -42,6 +42,7 @@ script:
                sed -i -e 's/read choice/echo automatic approval/g' scripts/install_steps &&
                ./install &&
                cd .. &&
+               pip install uavcan &&
                git pull && 
                git checkout $toolset_branch &&
                sudo PYTHONUNBUFFERED=1 ansible-playbook -v -i \"localhost,\" -c local docker_site.yml --tags \"travis,$used_modules\" -e \"travis_repo_dir=/host$TRAVIS_BUILD_DIR  travis_is_pull_request=$TRAVIS_PULL_REQUEST ros_release=$ros_release ubuntu_version=$ubuntu_version\"
