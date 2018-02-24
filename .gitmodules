@@ -25,3 +25,6 @@
 [submodule "modules/drive_ros_imu_filter"]
 	path = modules/drive_ros_imu_filter
 	url = https://github.com/tum-phoenix/drive_ros_imu_filter
+[submodule "modules/drive_ros_encoder_filter"]
+	path = modules/drive_ros_encoder_filter
+	url = https://github.com/tum-phoenix/drive_ros_encoder_filter
