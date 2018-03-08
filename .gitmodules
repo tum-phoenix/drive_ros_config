@@ -4,12 +4,6 @@
 [submodule "modules/drive_ros_msgs"]
 	path = modules/drive_ros_msgs
 	url = https://github.com/tum-phoenix/drive_ros_msgs
-[submodule "modules/drive_ros_visual_odometry"]
-	path = modules/drive_ros_visual_odometry
-	url = https://github.com/tum-phoenix/drive_ros_visual_odometry
-[submodule "modules/drive_ros_imu_odo_odometry"]
-	path = modules/drive_ros_imu_odo_odometry
-	url = https://github.com/tum-phoenix/drive_ros_imu_odo_odometry
 [submodule "modules/drive_ros_mavlink_device"]
 	path = modules/drive_ros_mavlink_device
 	url = https://github.com/tum-phoenix/drive_ros_mavlink_device
@@ -25,6 +19,12 @@
 [submodule "modules/drive_ros_imu_filter"]
 	path = modules/drive_ros_imu_filter
 	url = https://github.com/tum-phoenix/drive_ros_imu_filter
-[submodule "modules/drive_ros_encoder_odometry"]
-	path = modules/drive_ros_encoder_odometry
-	url = https://github.com/tum-phoenix/drive_ros_encoder_odometry
+[submodule "modules/drive_ros_localize_wheel_odometry"]
+	path = modules/drive_ros_localize_wheel_odometry
+	url = https://github.com/tum-phoenix/drive_ros_localize_wheel_odometry
+[submodule "modules/drive_ros_localize_visual_odometry"]
+	path = modules/drive_ros_localize_visual_odometry
+	url = https://github.com/tum-phoenix/drive_ros_localize_visual_odometry
+[submodule "modules/drive_ros_localize_inertial_navigation_system"]
+	path = modules/drive_ros_localize_inertial_navigation_system
+	url = https://github.com/tum-phoenix/drive_ros_localize_inertial_navigation_system
