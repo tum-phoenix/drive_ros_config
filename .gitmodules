@@ -28,3 +28,6 @@
 [submodule "modules/drive_ros_localize_odom_fusion"]
 	path = modules/drive_ros_localize_odom_fusion
 	url = https://github.com/tum-phoenix/drive_ros_localize_odom_fusion
+[submodule "modules/drive_ros_localize_inertial_navigation_system"]
+	path = modules/drive_ros_localize_inertial_navigation_system
+	url = https://github.com/tum-phoenix/drive_ros_localize_inertial_navigation_system
