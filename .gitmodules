@@ -25,3 +25,6 @@
 [submodule "modules/drive_ros_uavcan"]
 	path = modules/drive_ros_uavcan
 	url = https://github.com/tum-phoenix/drive_ros_uavcan.git
+[submodule "modules/drive_ros_localize_visual_odometry"]
+	path = modules/drive_ros_localize_visual_odometry
+	url = https://github.com/tum-phoenix/drive_ros_localize_visual_odometry.git
