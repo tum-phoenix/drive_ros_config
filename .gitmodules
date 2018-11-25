@@ -25,3 +25,6 @@
 [submodule "drive_ros_road_viz"]
 	path = modules/drive_ros_road_viz
 	url = https://github.com/tum-phoenix/drive_ros_road_viz
+[submodule "modules/drive_ros_localize_visual_odometry"]
+	path = modules/drive_ros_localize_visual_odometry
+	url = https://github.com/tum-phoenix/drive_ros_localize_visual_odometry.git
