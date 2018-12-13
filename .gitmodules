@@ -28,3 +28,6 @@
 [submodule "modules/drive_ros_localize_visual_odometry"]
 	path = modules/drive_ros_localize_visual_odometry
 	url = https://github.com/tum-phoenix/drive_ros_localize_visual_odometry.git
+[submodule "modules/drive_ros_trajectory_generator"]
+	path = modules/drive_ros_trajectory_generator
+	url = https://github.com/tum-phoenix/drive_ros_trajectory_generator.git
