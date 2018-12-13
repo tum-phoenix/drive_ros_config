@@ -1,0 +1,69 @@
+<launch>
+
+    <!-- TOP LEVEL LAUNCH FILE -->
+
+    <!-- vehicle name e.g. cc2017_car -->
+    <arg name="vehicle" value="cc2017_car"/>
+
+    <!-- homography topic name -->
+    <arg name="homography_topic" default="/camera/camera_homography"/>
+
+
+    <!-- hardware (camera, electonics, ...) attached ? -->
+    <arg name="hardware_enable" default="false" />
+
+
+    <!-- hardware enabled -->
+    <group if="$(arg hardware_enable)">
+
+        <!-- camera node & homography publisher -->
+        <include file="$(find drive_ros_ximea_importer)/launch/ximea_camera.launch">
+            <arg name="vehicle" value="$(arg vehicle)"/>
+            <arg name="homography_topic" value="$(arg homography_topic)"/>
+        </include>
+
+    </group>
+
+
+    <!-- hardware not enabled -->
+    <group unless="$(arg hardware_enable)">
+
+        <!-- homography publisher only -->
+        <include file="$(find drive_ros_ximea_importer)/launch/homography_publisher.launch">
+            <arg name="vehicle" value="$(arg vehicle)"/>
+            <arg name="homography_topic" value="$(arg homography_topic)"/>
+        </include>
+
+    </group>
+
+
+    <!-- lane detection using hough transform -->
+    <include file="$(find drive_ros_image_recognition)/launch/line_detection.launch">
+        <arg name="homography_topic" value="$(arg homography_topic)"/>
+        <arg name="incoming_image" default="/camera/image_raw"/>
+        <arg name="camera_info" default="/camera/camera_info"/>
+        <arg name="debug" default="false"/>
+        <arg name="use_nodelet" default="false"/>
+        <arg name="nodelet_manager" default=""/>
+        <arg name="output" value="log" />
+    </include>
+
+    <!-- Vision Node (old LMS code)
+    <include file="vision.launch"/>
+    -->
+
+    <!-- Vehicle specific -->
+    <include file="$(find drive_ros_cc2017_car)/launch/tf_pub.launch"/>
+
+
+    <!-- Mavlink (interface to car electronics) data import -->
+    <include file="$(find drive_ros_mavlink_cc2016)/launch/mavlink_CC2016.launch">
+        <arg name="output" value="log" />
+    </include>
+
+    <!-- Ego estimator based on IMU and odometer -->
+    <include file="$(find drive_ros_imu_odo_odometry)/launch/imu_odo_odometry.launch" >
+        <arg name="output" value="log" />
+    </include>
+
+</launch>

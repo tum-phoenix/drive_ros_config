@@ -1,0 +1,36 @@
+[submodule "modules/drive_ros_image_recognition"]
+	path = modules/drive_ros_image_recognition
+	url = https://github.com/tum-phoenix/drive_ros_image_recognition
+[submodule "modules/drive_ros_ximea_importer"]
+	path = modules/drive_ros_ximea_importer
+	url = https://github.com/tum-phoenix/drive_ros_ximea_importer
+[submodule "modules/drive_ros_camera_homography"]
+	path = modules/drive_ros_camera_homography
+	url = https://github.com/tum-phoenix/drive_ros_camera_homography
+[submodule "modules/drive_ros_msgs"]
+	path = modules/drive_ros_msgs
+	url = https://github.com/tum-phoenix/drive_ros_msgs
+[submodule "modules/drive_ros_cc2017_car"]
+	path = modules/drive_ros_cc2017_car
+	url = https://github.com/tum-phoenix/drive_ros_cc2017_car
+[submodule "modules/drive_ros_imu_odo_odometry"]
+	path = modules/drive_ros_imu_odo_odometry
+	url = https://github.com/tum-phoenix/drive_ros_imu_odo_odometry
+[submodule "modules/drive_ros_mavlink_CC2016"]
+	path = modules/drive_ros_mavlink_cc2016
+	url = https://github.com/tum-phoenix/drive_ros_mavlink_CC2016
+[submodule "lib/kalman"]
+	path = lib/kalman
+	url = https://github.com/tum-phoenix/kalman
+[submodule "drive_ros_road_viz"]
+	path = modules/drive_ros_road_viz
+	url = https://github.com/tum-phoenix/drive_ros_road_viz
+[submodule "modules/drive_ros_localize_visual_odometry"]
+	path = modules/drive_ros_localize_visual_odometry
+	url = https://github.com/tum-phoenix/drive_ros_localize_visual_odometry.git
+[submodule "modules/drive_ros_trajectory_generator"]
+	path = modules/drive_ros_trajectory_generator
+	url = https://github.com/tum-phoenix/drive_ros_trajectory_generator.git
+[submodule "modules/drive_ros_uavcan"]
+	path = modules/drive_ros_uavcan
+	url = https://github.com/tum-phoenix/drive_ros_uavcan.git
