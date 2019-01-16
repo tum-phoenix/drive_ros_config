@@ -31,3 +31,12 @@
 [submodule "modules/drive_ros_trajectory_generator"]
 	path = modules/drive_ros_trajectory_generator
 	url = https://github.com/tum-phoenix/drive_ros_trajectory_generator.git
+[submodule "modules/drive_ros_environment_model"]
+	path = modules/drive_ros_environment_model
+	url = https://github.com/tum-phoenix/drive_ros_environment_model.git
+[submodule "modules/drive_ros_laserscan_obstacle_generator"]
+	path = modules/drive_ros_laserscan_obstacle_generator
+	url = https://github.com/tum-phoenix/drive_ros_laserscan_obstacle_generator.git
+[submodule "modules/drive_ros_custom_behavior_trees"]
+	path = modules/drive_ros_custom_behavior_trees
+	url = https://github.com/tum-phoenix/drive_ros_custom_behavior_trees.git
