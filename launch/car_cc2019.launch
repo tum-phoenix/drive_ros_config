@@ -1,3 +1,55 @@
 <launch>
-<include file=""/>
+    <arg name="vehicle" default="cc2019_car"/>
+    <arg name="ximea_camera" default="camera"/>
+    <arg name="homography_topic" default="/$(arg ximea_camera)/camera_homography"/>
+    <arg name="visual_odometry_topic" default="/visual_odom/odom" />
+    <arg name="scan_topic" default="/scan"/>
+    <arg name="laser_obstacles_topic" default="/laser_obstacles"/>
+    <arg name="driving_line_topic" default="/driving_line"/>
+    <arg name="environment_model_topic" default="/environment_model"/>
+    <arg name="trajectory_meta_input_topic" default="/trajectory_meta_input"/>
+    <arg name="uavcan_topic" default="/canros/msg/phoenix_msgs/NucDriveCommand"/>
+
+    <arg name="use_vision_nodelet" default="false"/>
+    <arg name="vision_nodelet" default=""/>
+
+    <include file="$(find drive_ros_cc2019_car)/launch/sensor_drivers.launch">
+        <arg name="camera_name" value="ximea_camera"/>
+        <arg name="vehicle" value="$(arg vehicle)"/>
+        <arg name="homography_topic" value="$(arg homography_topic)"/>
+        <arg name="scan_topic" value="$(arg scan_topic)"/>
+        <arg name="use_vision_nodelet" value="$(arg use_vision_nodelet)"/>
+        <arg name="vision_nodelet" value="$(arg vision_nodelet)"/>
+    </include>
+
+    <include file="$(find drive_ros_cc2019_car)/launch/visual_processing.launch">
+        <arg name="ximea_camera" value="$(arg ximea_camera)"/>
+        <arg name="homography_topic" value="/$(arg ximea_camera)/camera_homography"/>
+        <arg name="visual_odometry_topic" value="$(arg visual_odometry_topic)"/>
+        <arg name="driving_line_topic" value="$(arg driving_line_topic)"/>
+        <arg name="use_nodelet" value="$(arg use_vision_nodelet)"/>
+        <arg name="vision_nodelet" value="$(arg vision_nodelet)"/>
+    </include>
+
+    <include file="$(find drive_ros_laserscan_obstacle_generator)/launch/laserscan_obstacle_generator.launch">
+        <arg name="scan_topic" default="$(arg scan_topic)"/>
+        <arg name="obstacles_topic" default="$(arg laser_obstacles_topic)"/>
+        <arg name="vehicle" default="$(arg vehicle)"/>
+    </include>
+
+    <include file="$(find drive_ros_environment_model)/launch/environment_model.launch">
+        <arg name="driving_line_in" default="$(arg driving_line_topic)"/>
+        <arg name="obstacles_in" default="$(arg laser_obstacles_topic)"/>
+        <arg name="env_out" default="$(arg environment_model_topic)"/>
+    </include>
+
+    <include file="$(find drive_ros_uavcan)/launch/server.launch"/>
+
+    <include file="$(find drive_ros_custom_behavior_trees)/launch/behaviorTree.launch"/>
+
+    <include file="$(find drive_ros_trajectory_generator)/launch/trajectory_line_creator.launch">
+        <arg name="driving_line_topic" default="$(arg driving_line_topic)"/>
+        <arg name="trajectory_meta_input_topic" default="$(arg laser_obstacles_topic)"/>
+        <arg name="uavcan_topic" default="$(arg uavcan_topic)"/>
+    </include>
 </launch>
