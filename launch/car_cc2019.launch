@@ -15,20 +15,17 @@
 
     <include file="$(find drive_ros_cc2019_car)/launch/sensor_drivers.launch">
         <arg name="camera_name" value="ximea_camera"/>
-        <arg name="vehicle" value="$(arg vehicle)"/>
         <arg name="homography_topic" value="$(arg homography_topic)"/>
         <arg name="scan_topic" value="$(arg scan_topic)"/>
-        <arg name="use_vision_nodelet" value="$(arg use_vision_nodelet)"/>
-        <arg name="vision_nodelet" value="$(arg vision_nodelet)"/>
     </include>
 
     <include file="$(find drive_ros_cc2019_car)/launch/visual_processing.launch">
-        <arg name="ximea_camera" value="$(arg ximea_camera)"/>
+        <arg name="camera" value="$(arg ximea_camera)"/>
         <arg name="homography_topic" value="/$(arg ximea_camera)/camera_homography"/>
-        <arg name="visual_odometry_topic" value="$(arg visual_odometry_topic)"/>
+        <arg name="odometry_topic" value="$(arg visual_odometry_topic)"/>
         <arg name="driving_line_topic" value="$(arg driving_line_topic)"/>
         <arg name="use_nodelet" value="$(arg use_vision_nodelet)"/>
-        <arg name="vision_nodelet" value="$(arg vision_nodelet)"/>
+        <arg name="nodelet_manager" value="$(arg vision_nodelet)"/>
     </include>
 
     <include file="$(find drive_ros_laserscan_obstacle_generator)/launch/laserscan_obstacle_generator.launch">
