@@ -46,3 +46,6 @@
 [submodule "modules/drive_ros_obstacle_fusion"]
 	path = modules/drive_ros_obstacle_fusion
 	url = https://github.com/tum-phoenix/drive_ros_obstacle_fusion.git
+[submodule "modules/driver_common"]
+	path = modules/driver_common
+	url = https://github.com/ros-drivers/driver_common.git
