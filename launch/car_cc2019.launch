@@ -9,6 +9,9 @@
     <arg name="environment_model_topic" default="/environment_model"/>
     <arg name="trajectory_meta_command_topic" default="/trajectory_meta_input"/>
     <arg name="uavcan_topic" default="/canros/msg/phoenix_msgs/NucDriveCommand"/>
+    <arg name="drive_state_topic" default="/canros/msg/phoenix_msgs/DriveState"/>
+    <arg name="line_detection_debug_image_topic" default="/line_detection_debug_image"/>
+    <arg name="trajectory_generation_debug_image_topic" default="/trajectory_generation_debug_image"/>
 
     <arg name="use_vision_nodelet" default="false"/>
     <arg name="vision_nodelet" default=""/>
@@ -17,6 +20,7 @@
         <arg name="camera_name" value="$(arg ximea_camera)"/>
         <arg name="homography_topic" value="$(arg homography_topic)"/>
         <arg name="scan_topic" value="$(arg scan_topic)"/>
+        <arg name="vehicle" value="$(arg vehicle)"/>
     </include>
 
     <include file="$(find drive_ros_cc2019_car)/launch/visual_processing.launch">
@@ -26,6 +30,7 @@
         <arg name="driving_line_topic" value="$(arg driving_line_topic)"/>
         <arg name="use_nodelet" value="$(arg use_vision_nodelet)"/>
         <arg name="nodelet_manager" value="$(arg vision_nodelet)"/>
+        <arg name="line_detection_debug_image_topic" default="$(arg line_detection_debug_image_topic)"/>
     </include>
 
     <include file="$(find drive_ros_laserscan_obstacle_generator)/launch/laserscan_obstacle_generator.launch">
@@ -84,12 +89,15 @@
         <arg name="initial_states" default="Track property"/>
 
         <arg name="env_in" value="$(arg environment_model_topic)"/>
-        <arg name="drive_state_out" value="$(arg trajectory_meta_command_topic)"/>
+        <arg name="drive_state_in" value="$(arg drive_state_topic)"/>
+        <arg name="meta_command_out" value="$(arg trajectory_meta_command_topic)"/>
     </include>
 
     <include file="$(find drive_ros_trajectory_generator)/launch/trajectory_line_creator.launch">
         <arg name="driving_line_topic" default="$(arg driving_line_topic)"/>
         <arg name="trajectory_meta_input_topic" default="$(arg trajectory_meta_command_topic)"/>
         <arg name="uavcan_topic" default="$(arg uavcan_topic)"/>
+        <arg name="debug_image_in" default="$(arg line_detection_debug_image_topic)"/>
+        <arg name="debug_image_out" default="$(arg trajectory_generation_debug_image_topic)"/>
     </include>
 </launch>
