@@ -7,7 +7,7 @@
     <arg name="laser_obstacles_topic" default="/laser_obstacles"/>
     <arg name="driving_line_topic" default="/driving_line"/>
     <arg name="environment_model_topic" default="/environment_model"/>
-    <arg name="trajectory_meta_input_topic" default="/trajectory_meta_input"/>
+    <arg name="trajectory_meta_command_topic" default="/trajectory_meta_input"/>
     <arg name="uavcan_topic" default="/canros/msg/phoenix_msgs/NucDriveCommand"/>
 
     <arg name="use_vision_nodelet" default="false"/>
@@ -86,7 +86,7 @@
 
     <include file="$(find drive_ros_trajectory_generator)/launch/trajectory_line_creator.launch">
         <arg name="driving_line_topic" default="$(arg driving_line_topic)"/>
-        <arg name="trajectory_meta_input_topic" default="$(arg laser_obstacles_topic)"/>
+        <arg name="trajectory_meta_input_topic" default="$(arg trajectory_meta_command_topic)"/>
         <arg name="uavcan_topic" default="$(arg uavcan_topic)"/>
     </include>
 </launch>
