@@ -14,7 +14,7 @@
     <arg name="vision_nodelet" default=""/>
 
     <include file="$(find drive_ros_cc2019_car)/launch/sensor_drivers.launch">
-        <arg name="camera_name" value="ximea_camera"/>
+        <arg name="camera_name" value="$(arg ximea_camera)"/>
         <arg name="homography_topic" value="$(arg homography_topic)"/>
         <arg name="scan_topic" value="$(arg scan_topic)"/>
     </include>
