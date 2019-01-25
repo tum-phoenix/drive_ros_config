@@ -82,6 +82,9 @@
         <arg name="start_value__give_way" default="false"/>
         <!-- Seperate the states with '|' if necessary !-->
         <arg name="initial_states" default="Track property"/>
+
+        <arg name="env_in" value="$(arg environment_model_topic)"/>
+        <arg name="drive_state_out" value="$(arg driving_line_topic)"/>
     </include>
 
     <include file="$(find drive_ros_trajectory_generator)/launch/trajectory_line_creator.launch">
