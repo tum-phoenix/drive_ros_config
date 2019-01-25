@@ -81,7 +81,7 @@
         <arg name="start_value__successful_parking_count" default="2"/>
         <arg name="start_value__give_way" default="false"/>
         <!-- Seperate the states with '|' if necessary !-->
-        <arg name="initial_states" type="str" default="Track property"/>
+        <arg name="initial_states" default="Track property"/>
     </include>
 
     <include file="$(find drive_ros_trajectory_generator)/launch/trajectory_line_creator.launch">
