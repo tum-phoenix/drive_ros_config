@@ -16,6 +16,10 @@
     <arg name="use_vision_nodelet" default="false"/>
     <arg name="vision_nodelet" default=""/>
 
+    <arg name="run_viz" default="true"/>
+
+    <include file="$(find drive_ros_cc2019_car)/launch/tf_pub.launch"/>
+
     <include file="$(find drive_ros_cc2019_car)/launch/sensor_drivers.launch">
         <arg name="camera_name" value="$(arg ximea_camera)"/>
         <arg name="homography_topic" value="$(arg homography_topic)"/>
@@ -100,4 +104,13 @@
         <arg name="debug_image_in" default="$(arg line_detection_debug_image_topic)"/>
         <arg name="debug_image_out" default="$(arg trajectory_generation_debug_image_topic)"/>
     </include>
+
+    <group if="$(arg run_viz)">
+        <include file="$(find drive_ros_env_viz)/launch/publish_obstacles.launch">
+            <arg name="obstacle_topic" default="$(arg laser_obstacles_topic)"/>
+        </include>
+        <include file="$(find drive_ros_env_viz)/launch/publish_roadline.launch">
+            <arg name="road_in" default="$(arg driving_line_topic)"/>
+        </include>
+    </group>
 </launch>
