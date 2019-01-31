@@ -2,7 +2,7 @@
     <arg name="realsense_camera_name" default="realsense"/>
     <arg name="traffic_sign_topic" default="/traffic_signs"/>
 
-    <include file="$(find realsense_ros)/launch/rs_aligned.launch">
+    <include file="$(find realsense_ros_camera)/launch/rs_aligned_depth.launch">
         <arg name="camera" value="$(arg realsense_camera_name)"/>
     </include>
 
