@@ -1,0 +1,14 @@
+<launch>
+    <arg name="realsense_camera_name" default="realsense"/>
+    <arg name="traffic_sign_topic" default="/traffic_signs"/>
+
+    <include file="$(find realsense_ros)/launch/rs_aligned.launch">
+        <arg name="camera" value="$(arg realsense_camera_name)"/>
+    </include>
+
+    <include file="$(find darknet_ros)/launch/yolov3-tiny-signs.launch">
+        <remap from="/camera/color/image_raw" to="/$(arg realsense_camera_name)/color/image_raw"/>
+        <remap from="/camera/aligned_depth_to_color/image_raw" to="/$(arg realsense_camera_name)/aligned_depth_color/image_raw"/>
+        <remap from="/darknet_ros/bounding_boxes" to="$(arg traffic_sign_topic)"/>
+    </include>
+</launch>

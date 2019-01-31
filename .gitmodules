@@ -52,3 +52,6 @@
 [submodule "modules/drive_ros_sign_detection"]
 	path = modules/drive_ros_sign_detection
 	url = https://github.com/tum-phoenix/drive_ros_sign_detection.git
+[submodule "modules/realsense"]
+	path = modules/realsense
+	url = https://github.com/tum-phoenix/realsense.git
