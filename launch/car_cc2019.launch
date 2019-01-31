@@ -11,7 +11,7 @@
     <arg name="driving_line_topic" default="/driving_line"/>
     <arg name="intersection_topic" default="/intersections"/>
     <arg name="traffic_sign_topic" default="/traffic_signs"/>
-    <arg name="realsense_camera_info_topic" default="/$(arg realsense_camera_name)/color/camera_info)"/>
+    <arg name="realsense_camera_info_topic" default="/$(arg realsense_camera_name)/color/camera_info"/>
     <arg name="environment_model_topic" default="/environment_model"/>
     <arg name="trajectory_meta_command_topic" default="/trajectory_meta_input"/>
     <arg name="uavcan_topic" default="/canros/msg/phoenix_msgs/NucDriveCommand"/>
@@ -25,7 +25,7 @@
     <arg name="run_viz" default="true"/>
     <arg name="obstacle_viz_topic" default="/obstacle_marker_viz"/>
     <arg name="marker_viz_topic" default="/marker_viz"/>
-    <arg name="road_viz_topic" default="/driving_line_viz"/>
+    <arg name="sign_viz_topic" default="/sign_viz"/>
 
     <arg name="bag_testing" default="false"/>
 
@@ -70,9 +70,9 @@
         <arg name="intersections_in" value="$(arg intersection_topic)"/>
 
         <arg name="env_out" value="$(arg environment_model_topic)"/>
-        <arg name="road_viz_out" value="$(arg road_viz_topic)"/>
-        <arg name="marker_viz_out" value="$(arg marker_viz_topic)"/>
         <arg name="obstacle_viz_out" value="$(arg obstacle_viz_topic)"/>
+        <arg name="marker_viz_out" value="$(arg marker_viz_topic)"/>
+        <arg name="sign_viz_out" value="$(arg sign_viz_topic)"/>
     </include>
 
     <group unless="$(arg bag_testing)">
@@ -136,14 +136,10 @@
 
     <group if="$(arg run_viz)">
         <include file="$(find drive_ros_env_viz)/launch/publish_obstacles.launch">
-            <arg name="obstacle_topic" value="$(arg obstacle_marker_viz)"/>
+            <arg name="obstacle_topic" value="$(arg laser_obstacles_topic)"/>
         </include>
         <include file="$(find drive_ros_env_viz)/launch/publish_roadline.launch">
-            <arg name="road_in" value="$(arg road_viz_topic)"/>
-        </include>
-        <include file="$(find drive_ros_env_viz)/launch/publish_obstacles.launch">
-            <arg name="obstacle_topic" value="$(arg marker_viz_topic)"/>
-            <arg name="obstacle_topic_viz" value="/marker_viz_out"/>
+            <arg name="road_in" value="$(arg driving_line_topic)"/>
         </include>
     </group>
 </launch>
