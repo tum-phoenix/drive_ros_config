@@ -55,3 +55,6 @@
 [submodule "modules/drive_ros_street_marker_detection"]
 	path = modules/drive_ros_street_marker_detection
 	url = https://github.com/tum-phoenix/drive_ros_street_marker_detection.git
+[submodule "modules/realsense"]
+	path = modules/realsense
+	url = https://github.com/tum-phoenix/realsense.git

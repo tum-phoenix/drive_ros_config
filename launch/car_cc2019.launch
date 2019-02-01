@@ -1,4 +1,7 @@
 <launch>
+<!--    THIS VALUE HAS TO BE THE SAME AS IN THE jetson_cc2019 launch file-->
+    <arg name="realsense_camera_name" default="realsense"/>
+
     <arg name="vehicle" default="cc2019_car"/>
     <arg name="ximea_camera" default="camera"/>
     <arg name="homography_topic" default="/$(arg ximea_camera)/camera_homography"/>
@@ -6,6 +9,9 @@
     <arg name="scan_topic" default="/scan"/>
     <arg name="laser_obstacles_topic" default="/laser_obstacles"/>
     <arg name="driving_line_topic" default="/driving_line"/>
+    <arg name="intersection_topic" default="/intersections"/>
+    <arg name="traffic_sign_topic" default="/traffic_signs"/>
+    <arg name="realsense_camera_info_topic" default="/$(arg realsense_camera_name)/color/camera_info"/>
     <arg name="environment_model_topic" default="/environment_model"/>
     <arg name="trajectory_meta_command_topic" default="/trajectory_meta_input"/>
     <arg name="uavcan_topic" default="/canros/msg/phoenix_msgs/NucDriveCommand"/>
@@ -17,6 +23,10 @@
     <arg name="vision_nodelet" default=""/>
 
     <arg name="run_viz" default="true"/>
+    <arg name="obstacle_viz_topic" default="/obstacle_marker_viz"/>
+    <arg name="marker_viz_topic" default="/marker_viz"/>
+    <arg name="sign_viz_topic" default="/sign_viz"/>
+
     <arg name="bag_testing" default="false"/>
 
     <arg name="trajectory_output" default="log"/>
@@ -39,6 +49,7 @@
         <arg name="homography_topic" value="/$(arg ximea_camera)/camera_homography"/>
         <arg name="odometry_topic" value="$(arg visual_odometry_topic)"/>
         <arg name="driving_line_topic" value="$(arg driving_line_topic)"/>
+        <arg name="intersection_topic" value="$(arg intersection_topic)"/>
         <arg name="use_nodelet" value="$(arg use_vision_nodelet)"/>
         <arg name="nodelet_manager" value="$(arg vision_nodelet)"/>
         <arg name="line_detection_debug_image_topic" value="$(arg line_detection_debug_image_topic)"/>
@@ -54,8 +65,14 @@
     <include file="$(find drive_ros_environment_model)/launch/environment_model.launch">
         <arg name="driving_line_in" value="$(arg driving_line_topic)"/>
         <arg name="obstacles_in" value="$(arg laser_obstacles_topic)"/>
+        <arg name="traffic_signs_in" value="$(arg traffic_sign_topic)"/>
+        <arg name="camera_info_in" value="$(arg realsense_camera_info_topic)"/>
+        <arg name="intersections_in" value="$(arg intersection_topic)"/>
+
         <arg name="env_out" value="$(arg environment_model_topic)"/>
-        <arg name="output" value="$(arg env_model_output)"/>
+        <arg name="obstacle_viz_out" value="$(arg obstacle_viz_topic)"/>
+        <arg name="marker_viz_out" value="$(arg marker_viz_topic)"/>
+        <arg name="sign_viz_out" value="$(arg sign_viz_topic)"/>
     </include>
 
     <group unless="$(arg bag_testing)">
@@ -66,7 +83,7 @@
         <!-- "random" variables (factors, etc) -->
         <!-- possible modes: "PARKING", "OBSTACLES"-->
         <arg name="mode" default="OBSTACLES"/>
-        <arg name="clean_output" default="false"/>
+        <arg name="clean_output" default="true"/>
         <arg name="output_show_computation_time" default="false"/>
         <arg name="tick_frequency" default="50"/>
         <arg name="object_following_break_factor" default="0.8"/>
@@ -101,7 +118,7 @@
         <arg name="start_value__successful_parking_count" default="0"/>
         <arg name="start_value__give_way" default="false"/>
         <!-- Seperate the states with '|' if necessary !-->
-        <arg name="initial_states" default="Track property"/>
+        <arg name="initial_states" default=""/>
 
         <arg name="env_in" value="$(arg environment_model_topic)"/>
         <arg name="drive_state_in" value="$(arg drive_state_topic)"/>
