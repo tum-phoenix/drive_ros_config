@@ -28,6 +28,7 @@
     <arg name="sign_viz_topic" default="/sign_viz"/>
 
     <arg name="bag_testing" default="false"/>
+    <arg name="use_visual_odometry" default="false"/>
 
     <arg name="trajectory_output" default="log"/>
     <arg name="env_model_output" default="log"/>
@@ -53,6 +54,7 @@
         <arg name="use_nodelet" value="$(arg use_vision_nodelet)"/>
         <arg name="nodelet_manager" value="$(arg vision_nodelet)"/>
         <arg name="line_detection_debug_image_topic" value="$(arg line_detection_debug_image_topic)"/>
+        <arg name="use_visual_odometry" value="$(arg use_visual_odometry)"/>
         <arg name="output" value="$(arg vision_output)"/>
     </include>
 
