@@ -74,6 +74,7 @@
         <arg name="camera_info_in" value="$(arg realsense_camera_info_topic)"/>
         <arg name="intersections_in" value="$(arg intersection_topic)"/>
         <arg name="street_markings_in" value="$(arg street_marking_topic)"/>
+        <arg name="scan_in" value="$(arg scan_topic)"/>
 
         <arg name="env_out" value="$(arg environment_model_topic)"/>
         <arg name="obstacle_viz_out" value="$(arg obstacle_viz_topic)"/>
