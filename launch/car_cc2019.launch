@@ -53,6 +53,7 @@
         <arg name="driving_line_topic" value="$(arg driving_line_topic)"/>
         <arg name="intersection_topic" value="$(arg intersection_topic)"/>
         <arg name="street_marking_topic" value="$(arg street_marking_topic)"/>
+        <arg name="environment_model_topic" value="$(arg environment_model_topic)" />
         <arg name="use_nodelet" value="$(arg use_vision_nodelet)"/>
         <arg name="nodelet_manager" value="$(arg vision_nodelet)"/>
         <arg name="line_detection_debug_image_topic" value="$(arg line_detection_debug_image_topic)"/>
