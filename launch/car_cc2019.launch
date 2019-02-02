@@ -74,7 +74,7 @@
         <arg name="camera_info_in" value="$(arg realsense_camera_info_topic)"/>
         <arg name="intersections_in" value="$(arg intersection_topic)"/>
         <arg name="street_markings_in" value="$(arg street_marking_topic)"/>
-
+        <arg name="output" value="$(arg env_model_output)"/>
         <arg name="env_out" value="$(arg environment_model_topic)"/>
         <arg name="obstacle_viz_out" value="$(arg obstacle_viz_topic)"/>
         <arg name="intersection_viz_out" value="$(arg intersection_viz_out)"/>
@@ -97,6 +97,7 @@
         <arg name="tick_frequency" default="50"/>
         <arg name="object_following_break_factor" default="0.8"/>
         <arg name="break_distance_safety_factor" default="1.6"/>
+        <arg name="intersection_turn_duration" default="800"/>
         <!-- Speeds -->
         <arg name="general_max_speed" default="1.0"/>
         <arg name="general_max_speed_cautious" default="0.8"/>
