@@ -30,6 +30,9 @@
 
     <arg name="bag_testing" default="false"/>
     <arg name="use_visual_odometry" default="false"/>
+    
+    <arg name="static_frame" default="odom"/>
+    <arg name="moving_frame" default="rear_axis_middle_ground"/>
 
     <arg name="trajectory_output" default="log"/>
     <arg name="env_model_output" default="log"/>
@@ -59,6 +62,8 @@
         <arg name="line_detection_debug_image_topic" value="$(arg line_detection_debug_image_topic)"/>
         <arg name="use_visual_odometry" value="$(arg use_visual_odometry)"/>
         <arg name="output" value="$(arg vision_output)"/>
+        <arg name="static_frame" value="$(arg static_frame)"/>
+        <arg name="moving_frame" value="$(arg moving_frame)"/>
     </include>
 
     <include file="$(find drive_ros_laserscan_obstacle_generator)/launch/laserscan_obstacle_generator.launch">
@@ -85,7 +90,10 @@
     <group unless="$(arg bag_testing)">
         <include file="$(find drive_ros_uavcan)/launch/server.launch"/>
         <group unless="$(arg use_visual_odometry)">
-            <include file="$(find drive_ros_environment_model)/launch/uavcan_odom_to_ros_odom.launch"/>
+            <include file="$(find drive_ros_environment_model)/launch/uavcan_odom_to_ros_odom.launch">
+				<arg name="static_frame" default="odom"/>
+   				<arg name="moving_frame" default="rear_axis_middle_ground"/>
+            </include>
         </group>
     </group>
 
