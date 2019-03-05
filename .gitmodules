@@ -1,0 +1,9 @@
+[submodule "modules/drive_gazebo_sim"]
+	path = modules/drive_gazebo_sim
+	url = https://github.com/tum-phoenix/drive_gazebo_sim.git
+[submodule "modules/drive_gazebo_worlds"]
+	path = modules/drive_gazebo_worlds
+	url = https://github.com/tum-phoenix/drive_gazebo_worlds.git
+[submodule "modules/realsense_gazebo_plugin"]
+	path = modules/realsense_gazebo_plugin
+	url = https://github.com/tum-phoenix/realsense_gazebo_plugin.git
