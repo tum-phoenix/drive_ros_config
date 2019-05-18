@@ -58,3 +58,9 @@
 [submodule "modules/realsense"]
 	path = modules/realsense
 	url = https://github.com/tum-phoenix/realsense.git
+[submodule "drive_ros_parking_controller"]
+	path = drive_ros_parking_controller
+	url = ../drive_ros_parking_controller
+[submodule "modules/drive_ros_parking_controller"]
+	path = modules/drive_ros_parking_controller
+	url = https://github.com/tum-phoenix/drive_ros_parking_controller.git
