@@ -49,3 +49,6 @@
 [submodule "modules/drive_teensy_main"]
 	path = modules/drive_teensy_main
 	url = https://github.com/tum-phoenix/drive_teensy_main.git
+[submodule "modules/darknet_ros_msgs"]
+	path = modules/darknet_ros_msgs
+	url = https://github.com/tum-phoenix/darknet_ros_msgs.git
