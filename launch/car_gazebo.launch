@@ -1,0 +1,181 @@
+<launch>
+<!--    THIS VALUE HAS TO BE THE SAME AS IN THE jetson_cc2019 launch file-->
+    <arg name="realsense_camera_name" default="realsense"/>
+
+    <arg name="vehicle" default="cc2019_car"/>
+    <arg name="ximea_camera" default="camera"/>
+    <arg name="homography_topic" default="/$(arg ximea_camera)/camera_homography"/>
+    <arg name="visual_odometry_topic" default="/visual_odom/odom" />
+    <arg name="scan_topic" default="/scan"/>
+    <arg name="laser_obstacles_topic" default="/laser_obstacles"/>
+    <arg name="driving_line_topic" default="/driving_line"/>
+    <arg name="intersection_topic" default="/intersections"/>
+    <arg name="street_marking_topic" default="/street_markings"/>
+    <arg name="traffic_sign_topic" default="/traffic_signs"/>
+    <arg name="realsense_camera_info_topic" default="/$(arg realsense_camera_name)/color/camera_info"/>
+    <arg name="environment_model_topic" default="/environment_model"/>
+    <arg name="trajectory_meta_command_topic" default="/trajectory_meta_input"/>
+    <arg name="uavcan_topic" default="/canros/msg/phoenix_msgs/NucDriveCommand"/>
+    <arg name="drive_state_topic" default="/canros/msg/phoenix_msgs/DriveState"/>
+    <arg name="line_detection_debug_image_topic" default="/line_detection_debug_image"/>
+    <arg name="trajectory_generation_debug_image_topic" default="/trajectory_generation_debug_image"/>
+
+    <arg name="use_vision_nodelet" default="false"/>
+    <arg name="vision_nodelet" default=""/>
+
+    <arg name="run_viz" default="true"/>
+    <arg name="obstacle_viz_topic" default="/obstacle_marker_viz"/>
+    <arg name="intersection_viz_out" default="/intersection_viz"/>
+    <arg name="sign_viz_topic" default="/sign_viz"/>
+
+    <arg name="simulation" default="true"/>
+    <arg name="bag_testing" default="false"/>
+    <arg name="use_visual_odometry" default="false"/>
+    
+    <arg name="static_frame" default="base_link"/>  <!-- odom for real car -->
+    <arg name="moving_frame" default="rear_axis_middle_ground"/>
+
+    <arg name="trajectory_output" default="log"/>
+    <arg name="env_model_output" default="log"/>
+    <arg name="vision_output" default="log"/>
+
+    <group unless="$(arg simulation)">
+        <include file="$(find drive_ros_cc2019_car)/launch/tf_pub.launch"/>
+    </group>
+
+    <group unless="$(eval arg('bag_testing') or arg('simulation'))">
+        <include file="$(find drive_ros_cc2019_car)/launch/sensor_drivers.launch">
+            <arg name="camera_name" value="$(arg ximea_camera)"/>
+            <arg name="homography_topic" value="$(arg homography_topic)"/>
+            <arg name="scan_topic" value="$(arg scan_topic)"/>
+            <arg name="vehicle" value="$(arg vehicle)"/>
+        </include>
+    </group>
+
+    <group if="$(arg simulation)">
+        <include file="$(find drive_gazebo_sim)/launch/gazebo_urdf.launch"/>
+        <include file="$(find drive_ros_ximea_importer)/launch/homography_publisher.launch"/>
+        <include file="$(find drive_ros_gazebo_control)/launch/gazebo_odom_publisher.launch"/>
+    </group>
+
+    <include file="$(find drive_ros_cc2019_car)/launch/visual_processing.launch">
+        <arg name="camera" value="$(arg ximea_camera)"/>
+        <arg name="homography_topic" value="/$(arg ximea_camera)/camera_homography"/>
+        <arg name="odometry_topic" value="$(arg visual_odometry_topic)"/>
+        <arg name="driving_line_topic" value="$(arg driving_line_topic)"/>
+        <arg name="intersection_topic" value="$(arg intersection_topic)"/>
+        <arg name="street_marking_topic" value="$(arg street_marking_topic)"/>
+        <arg name="environment_model_topic" value="$(arg environment_model_topic)" />
+        <arg name="use_nodelet" value="$(arg use_vision_nodelet)"/>
+        <arg name="nodelet_manager" value="$(arg vision_nodelet)"/>
+        <arg name="line_detection_debug_image_topic" value="$(arg line_detection_debug_image_topic)"/>
+        <arg name="use_visual_odometry" value="$(arg use_visual_odometry)"/>
+        <arg name="output" value="$(arg vision_output)"/>
+        <arg name="static_frame" value="$(arg static_frame)"/>
+        <arg name="moving_frame" value="$(arg moving_frame)"/>
+    </include>
+
+    <include file="$(find drive_ros_laserscan_obstacle_generator)/launch/laserscan_obstacle_generator.launch">
+        <arg name="scan_topic" value="$(arg scan_topic)"/>
+        <arg name="obstacles_topic" value="$(arg laser_obstacles_topic)"/>
+        <arg name="vehicle" value="$(arg vehicle)"/>
+    </include>
+
+    <include file="$(find drive_ros_environment_model)/launch/environment_model.launch">
+        <arg name="driving_line_in" value="$(arg driving_line_topic)"/>
+        <arg name="obstacles_in" value="$(arg laser_obstacles_topic)"/>
+        <arg name="traffic_signs_in" value="$(arg traffic_sign_topic)"/>
+        <arg name="camera_info_in" value="$(arg realsense_camera_info_topic)"/>
+        <arg name="intersections_in" value="$(arg intersection_topic)"/>
+        <arg name="street_markings_in" value="$(arg street_marking_topic)"/>
+        <arg name="output" value="$(arg env_model_output)"/>
+        <arg name="scan_in" value="$(arg scan_topic)"/>
+        <arg name="env_out" value="$(arg environment_model_topic)"/>
+        <arg name="obstacle_viz_out" value="$(arg obstacle_viz_topic)"/>
+        <arg name="intersection_viz_out" value="$(arg intersection_viz_out)"/>
+        <arg name="sign_viz_out" value="$(arg sign_viz_topic)"/>
+    </include>
+
+    <group unless="$(eval arg('bag_testing') or arg('simulation'))">
+        <include file="$(find drive_ros_uavcan)/launch/server.launch"/>
+        <group unless="$(arg use_visual_odometry)">
+            <include file="$(find drive_ros_environment_model)/launch/uavcan_odom_to_ros_odom.launch">
+				<arg name="static_frame" default="odom"/>
+   				<arg name="moving_frame" default="rear_axis_middle_ground"/>
+            </include>
+        </group>
+    </group>
+
+    <include file="$(find drive_ros_custom_behavior_trees)/launch/behaviorTree.launch">
+        <!-- "random" variables (factors, etc) -->
+        <!-- possible modes: "PARKING", "OBSTACLES"-->
+        <arg name="mode" default="OBSTACLES"/>
+        <arg name="clean_output" default="true"/>
+        <arg name="output_show_computation_time" default="false"/>
+        <arg name="tick_frequency" default="50"/>
+        <arg name="object_following_break_factor" default="0.8"/>
+        <arg name="break_distance_safety_factor" default="1.6"/>
+        <arg name="intersection_turn_duration" default="800"/>
+        <!-- Speeds -->
+        <arg name="general_max_speed" default="1.0"/>
+        <arg name="general_max_speed_cautious" default="0.8"/>
+        <arg name="max_bridge_speed" default="1.5"/>
+        <arg name="parking_spot_search_speed" default="0.5"/>
+        <arg name="max_lane_switch_speed" default="2.5"/>
+        <arg name="intersection_turn_speed" default="1.0"/>
+        <arg name="sharp_turn_speed" default="2.5"/>
+        <arg name="very_sharp_turn_speed" default="2.0"/>
+        <arg name="speed_zero_tolerance" default="0.05"/>
+        <!-- Distances -->
+        <arg name="min_sign_react_distance" default="0.1"/>
+        <arg name="max_sign_react_distance" default="0.5"/>
+        <arg name="overtake_distance" default="1.5"/> <!-- According to the regulations this value must be at least 0.3-->
+        <arg name="barred_area_react_distance" default="0.5"/>
+        <arg name="oncoming_traffic_clearance" default="5.0"/>
+        <arg name="max_start_box_distance" default="20.0"/>
+        <arg name="intersection_max_obj_distance" default="0.8"/>
+
+        <!-- These are usually set by the BT and may be changed for testing purposes only!-->
+        <arg name="dynamic_reconfigure_overwrite_runtime_vals" default="false"/>
+        <arg name="start_value__overtaking_forbidden_zone" default="false"/>
+        <arg name="start_value__express_way" default="false"/>
+        <arg name="start_value__priority_road" default="false"/>
+        <arg name="start_value__force_stop" default="false"/>
+        <arg name="start_value__on_bridge" default="false"/>
+        <arg name="start_value__speed_limit" default="100.0"/>
+        <arg name="start_value__successful_parking_count" default="0"/>
+        <arg name="start_value__give_way" default="false"/>
+        <!-- Seperate the states with '|' if necessary !-->
+        <arg name="initial_states" default=""/>
+
+        <arg name="env_in" value="$(arg environment_model_topic)"/>
+        <arg name="drive_state_in" value="$(arg drive_state_topic)"/>
+        <arg name="meta_command_out" value="$(arg trajectory_meta_command_topic)"/>
+    </include>
+
+    <include file="$(find drive_ros_trajectory_generator)/launch/trajectory_line_creator.launch">
+        <arg name="driving_line_topic" value="$(arg driving_line_topic)"/>
+        <arg name="trajectory_meta_input_topic" value="$(arg trajectory_meta_command_topic)"/>
+        <arg name="uavcan_topic" value="$(arg uavcan_topic)"/>
+        <arg name="debug_image_in" value="$(arg line_detection_debug_image_topic)"/>
+        <arg name="debug_image_out" value="$(arg trajectory_generation_debug_image_topic)"/>
+        <arg name="output" value="$(arg trajectory_output)"/>
+    </include>
+
+    <group if="$(arg simulation)">
+        <include file="$(find drive_ros_gazebo_control)/launch/gazebo_body_control.launch">
+            <arg name="manual" value="false"/>
+            <arg name="command_in" value="$(arg uavcan_topic)"/>
+        </include>
+    </group>
+
+    <group if="$(arg run_viz)">
+        <include file="$(find drive_ros_env_viz)/launch/publish_obstacles.launch">
+            <arg name="obstacle_topic" value="$(arg laser_obstacles_topic)"/>
+        </include>
+        <include file="$(find drive_ros_env_viz)/launch/publish_roadline.launch">
+            <arg name="road_in" value="$(arg driving_line_topic)"/>
+        </include>
+    </group>
+</launch>
+

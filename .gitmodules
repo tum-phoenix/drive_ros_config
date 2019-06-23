@@ -7,3 +7,45 @@
 [submodule "modules/realsense_gazebo_plugin"]
 	path = modules/realsense_gazebo_plugin
 	url = https://github.com/tum-phoenix/realsense_gazebo_plugin.git
+[submodule "modules/drive_ros_gazebo_control"]
+	path = modules/drive_ros_gazebo_control
+	url = https://github.com/tum-phoenix/drive_ros_gazebo_control.git
+[submodule "modules/drive_ros_cc2019_car"]
+	path = modules/drive_ros_cc2019_car
+	url = https://github.com/tum-phoenix/drive_ros_cc2019_car.git
+[submodule "modules/drive_ros_image_recognition"]
+	path = modules/drive_ros_image_recognition
+	url = https://github.com/tum-phoenix/drive_ros_image_recognition.git
+[submodule "modules/drive_ros_msgs"]
+	path = modules/drive_ros_msgs
+	url = https://github.com/tum-phoenix/drive_ros_msgs.git
+[submodule "modules/drive_ros_uavcan"]
+	path = modules/drive_ros_uavcan
+	url = https://github.com/tum-phoenix/drive_ros_uavcan.git
+[submodule "modules/drive_teensy_main"]
+	path = modules/drive_teensy_main
+	url = https://github.com/tum-phoenix/drive_teensy_main.git
+[submodule "modules/drive_ros_custom_behavior_trees"]
+	path = modules/drive_ros_custom_behavior_trees
+	url = https://github.com/tum-phoenix/drive_ros_custom_behavior_trees.git
+[submodule "modules/drive_ros_street_marker_detection"]
+	path = modules/drive_ros_street_marker_detection
+	url = https://github.com/tum-phoenix/drive_ros_street_marker_detection.git
+[submodule "modules/drive_ros_laserscan_obstacle_generator"]
+	path = modules/drive_ros_laserscan_obstacle_generator
+	url = https://github.com/tum-phoenix/drive_ros_laserscan_obstacle_generator.git
+[submodule "modules/drive_ros_environment_model"]
+	path = modules/drive_ros_environment_model
+	url = https://github.com/tum-phoenix/drive_ros_environment_model.git
+[submodule "modules/darknet_ros_msgs"]
+	path = modules/darknet_ros_msgs
+	url = https://github.com/tum-phoenix/darknet_ros_msgs.git
+[submodule "modules/drive_ros_trajectory_generator"]
+	path = modules/drive_ros_trajectory_generator
+	url = https://github.com/tum-phoenix/drive_ros_trajectory_generator.git
+[submodule "modules/drive_ros_env_viz"]
+	path = modules/drive_ros_env_viz
+	url = https://github.com/tum-phoenix/drive_ros_env_viz.git
+[submodule "modules/drive_ros_ximea_importer"]
+	path = modules/drive_ros_ximea_importer
+	url = https://github.com/tum-phoenix/drive_ros_ximea_importer.git
