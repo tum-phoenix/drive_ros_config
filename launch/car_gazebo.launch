@@ -147,7 +147,7 @@
         <arg name="start_value__give_way" default="false"/>
         <!-- Seperate the states with '|' if necessary !-->
         <!-- 'Intial driving' means driving until the start line is seen, 'Track Property' can also be used. Normally, waits for start box !-->
-        <arg name="initial_states" default="Initial Driving"/>
+        <arg name="initial_states" default="Track property"/>
 
         <arg name="env_in" value="$(arg environment_model_topic)"/>
         <arg name="drive_state_in" value="$(arg drive_state_topic)"/>
