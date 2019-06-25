@@ -29,6 +29,7 @@
     <arg name="sign_viz_topic" default="/sign_viz"/>
 
     <arg name="simulation" default="true"/>
+    <arg name="new_controller" default="false"/>
     <arg name="bag_testing" default="false"/>
     <arg name="use_visual_odometry" default="false"/>
     
@@ -38,6 +39,7 @@
     <arg name="trajectory_output" default="log"/>
     <arg name="env_model_output" default="log"/>
     <arg name="vision_output" default="log"/>
+    <arg name="trajectory_tracking_controller_output" default="log"/>
 
     <group unless="$(arg simulation)">
         <include file="$(find drive_ros_cc2019_car)/launch/tf_pub.launch"/>
@@ -162,6 +164,16 @@
         <arg name="debug_image_out" value="$(arg trajectory_generation_debug_image_topic)"/>
         <arg name="output" value="$(arg trajectory_output)"/>
     </include>
+
+    <group if="$(arg new_controller)">
+        <include file="$(find drive_ros_trajectory_tracking_control)/launch/trajectory_tracking_control.launch">
+            <arg name="trajectory_meta_input_topic" value="$(arg trajectory_meta_command_topic)"/>
+            <arg name="drive_command_out" value="$(arg uavcan_topic)"/>
+            <arg name="driving_line_topic" value="$(arg driving_line_topic"/>
+            <arg name="output" default="$(arg trajectory_tracking_controller_output)"/>
+            <arg name="uavcan_topic" default="/canros/msg/phoenix_msgs/NucDriveCommand"/>
+        </include>
+    </group>
 
     <group if="$(arg simulation)">
         <include file="$(find drive_ros_gazebo_control)/launch/gazebo_body_control.launch">
