@@ -52,3 +52,6 @@
 [submodule "lib/kalman"]
     path = lib/kalman
 	url = https://github.com/tum-phoenix/kalman
+[submodule "modules/drive_ros_trajectory_tracking_control"]
+	path = modules/drive_ros_trajectory_tracking_control
+	url = https://github.com/tum-phoenix/drive_ros_trajectory_tracking_control.git
