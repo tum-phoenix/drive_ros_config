@@ -19,6 +19,7 @@
     <arg name="drive_state_topic" default="/canros/msg/phoenix_msgs/DriveState"/>
     <arg name="line_detection_debug_image_topic" default="/line_detection_debug_image"/>
     <arg name="trajectory_generation_debug_image_topic" default="/trajectory_generation_debug_image"/>
+    <arg name="trajectory_topic" default="/trajectory"/>
 
     <arg name="use_vision_nodelet" default="false"/>
     <arg name="vision_nodelet" default=""/>
@@ -58,7 +59,9 @@
         <include file="$(find drive_gazebo_sim)/launch/gazebo_urdf.launch"/>
         <include file="$(find drive_ros_ximea_importer)/launch/homography_publisher.launch"/>
         <include file="$(find drive_ros_gazebo_control)/launch/gazebo_odom_publisher.launch"/>
-        <include file="$(find drive_ros_gazebo_control)/launch/gazebo_drive_state_publisher.launch"/>
+        <include file="$(find drive_ros_gazebo_control)/launch/gazebo_drive_state_publisher.launch">
+            <arg name="drive_state_topic" value="$(arg drive_state_topic)"/>
+        </include>
     </group>
 
     <include file="$(find drive_ros_cc2019_car)/launch/visual_processing.launch">
@@ -163,16 +166,17 @@
         <arg name="uavcan_topic" value="$(arg uavcan_topic)"/>
         <arg name="debug_image_in" value="$(arg line_detection_debug_image_topic)"/>
         <arg name="debug_image_out" value="$(arg trajectory_generation_debug_image_topic)"/>
+        <arg name="trajectory_topic" value="$(arg trajectory_topic)"/>
         <arg name="output" value="$(arg trajectory_output)"/>
     </include>
 
     <group if="$(arg new_controller)">
-        <include file="$(find drive_ros_trajectory_tracking_control)/launch/trajectory_tracking_control.launch">
+        <include file="$(find drive_ros_trajectory_tracking_control)/launch/trajectory_tracking_controller.launch">
             <arg name="trajectory_meta_input_topic" value="$(arg trajectory_meta_command_topic)"/>
             <arg name="drive_command_out" value="$(arg uavcan_topic)"/>
-            <arg name="driving_line_topic" value="$(arg driving_line_topic"/>
-            <arg name="drive_state_in" default="$(arg drive_state_topic)"/>
-            <arg name="output" default="$(arg trajectory_tracking_controller_output)"/>
+            <arg name="trajectory_topic" value="$(arg trajectory_topic)"/>
+            <arg name="drive_state_in" value="$(arg drive_state_topic)"/>
+            <arg name="output" value="$(arg trajectory_tracking_controller_output)"/>
         </include>
     </group>
 
