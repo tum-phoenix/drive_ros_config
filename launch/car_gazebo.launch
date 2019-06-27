@@ -22,7 +22,7 @@
     <arg name="environment_model_topic" default="/environment_model"/>
     <arg name="trajectory_meta_command_topic" default="/trajectory_meta_input"/>
     <arg name="uavcan_topic" default="/canros/msg/phoenix_msgs/NucDriveCommand" unless="$(arg manual_drive)"/>
-    <arg name="uavcan_topic" default="/canros/msg/phoenix_msgs/RemoteControl" unless="$(arg manual_drive)"/>
+    <arg name="uavcan_topic" default="/canros/msg/phoenix_msgs/RemoteControl" if="$(arg manual_drive)"/>
     <arg name="drive_state_topic" default="/canros/msg/phoenix_msgs/DriveState"/>
     <arg name="line_detection_debug_image_topic" default="/line_detection_debug_image"/>
     <arg name="trajectory_generation_debug_image_topic" default="/trajectory_generation_debug_image"/>
@@ -162,15 +162,17 @@
         <arg name="meta_command_out" value="$(arg trajectory_meta_command_topic)"/>
     </include>
 
-    <include file="$(find drive_ros_trajectory_generator)/launch/trajectory_line_creator.launch">
-        <arg name="driving_line_topic" value="$(arg driving_line_topic)"/>
-        <arg name="trajectory_meta_input_topic" value="$(arg trajectory_meta_command_topic)"/>
-        <arg name="uavcan_topic" value="$(arg uavcan_topic)"/>
-        <arg name="debug_image_in" value="$(arg line_detection_debug_image_topic)"/>
-        <arg name="debug_image_out" value="$(arg trajectory_generation_debug_image_topic)"/>
-        <arg name="trajectory_topic" value="$(arg trajectory_topic)"/>
-        <arg name="output" value="$(arg trajectory_output)"/>
-    </include>
+    <group unless="$(arg manual_drive)">
+        <include file="$(find drive_ros_trajectory_generator)/launch/trajectory_line_creator.launch">
+            <arg name="driving_line_topic" value="$(arg driving_line_topic)"/>
+            <arg name="trajectory_meta_input_topic" value="$(arg trajectory_meta_command_topic)"/>
+            <arg name="uavcan_topic" value="$(arg uavcan_topic)"/>
+            <arg name="debug_image_in" value="$(arg line_detection_debug_image_topic)"/>
+            <arg name="debug_image_out" value="$(arg trajectory_generation_debug_image_topic)"/>
+            <arg name="trajectory_topic" value="$(arg trajectory_topic)"/>
+            <arg name="output" value="$(arg trajectory_output)"/>
+        </include>
+    </group>
 
     <group if="$(arg new_controller)">
         <include file="$(find drive_ros_trajectory_tracking_control)/launch/trajectory_tracking_controller.launch">
@@ -183,16 +185,15 @@
     </group>
 
     <group if="$(arg manual_drive)">
-        <arg name="twist_topic" value="/cmd_twist"/>
-        <node name="keyboard_teleop" pkg="teleop_twist_keyboard" type="teleop_twist_keyboard.py" respawn="false" output="screen">
-            <remap from="cmd_vel" value="$(arg twist_topic)"/>
-        </node>
+        <arg name="twist_topic" value="/cmd_vel"/>
+<!--        <node name="keyboard_teleop" pkg="teleop_twist_keyboard" type="teleop_twist_keyboard.py" respawn="false" output="screen">
+            <param name="speed" value="5.0" type="double"/>
+            <remap from="/cmd_vel" to="$(arg twist_topic)"/>
+        </node>-->
 
         <include file="$(find drive_ros_gazebo_control)/launch/twist_to_remote_control.launch">
-            <arg name="manual" value="false" unless="$(arg manual_drive)"/>
-            <arg name="manual" value="true" if="$(arg manual_drive)"/>
             <arg name="twist_topic" value="$(arg twist_topic)"/>
-            <arg name="remote_control_out" value="$(arg uavcan_topic)"/>
+            <arg name="remote_control_topic" value="$(arg uavcan_topic)"/>
         </include>
     </group>
 

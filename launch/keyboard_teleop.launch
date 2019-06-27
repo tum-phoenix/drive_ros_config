@@ -1,0 +1,7 @@
+<launch>
+    <arg name="twist_topic" value="/cmd_vel"/>
+    <node name="keyboard_teleop" pkg="teleop_twist_keyboard" type="teleop_twist_keyboard.py" respawn="false" output="screen">
+        <param name="speed" value="5.0" type="double"/>
+        <remap from="/cmd_vel" to="$(arg twist_topic)"/>
+    </node>
+</launch>
