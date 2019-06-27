@@ -2,6 +2,12 @@
 <!--    THIS VALUE HAS TO BE THE SAME AS IN THE jetson_cc2019 launch file-->
     <arg name="realsense_camera_name" default="realsense"/>
 
+    <arg name="simulation" default="true"/>
+    <arg name="manual_drive" default="false"/>
+    <arg name="new_controller" default="false"/>
+    <arg name="bag_testing" default="false"/>
+    <arg name="use_visual_odometry" default="false"/>
+
     <arg name="vehicle" default="cc2019_car"/>
     <arg name="ximea_camera" default="camera"/>
     <arg name="homography_topic" default="/$(arg ximea_camera)/camera_homography"/>
@@ -15,7 +21,8 @@
     <arg name="realsense_camera_info_topic" default="/$(arg realsense_camera_name)/color/camera_info"/>
     <arg name="environment_model_topic" default="/environment_model"/>
     <arg name="trajectory_meta_command_topic" default="/trajectory_meta_input"/>
-    <arg name="uavcan_topic" default="/canros/msg/phoenix_msgs/NucDriveCommand"/>
+    <arg name="uavcan_topic" default="/canros/msg/phoenix_msgs/NucDriveCommand" unless="$(arg manual_drive)"/>
+    <arg name="uavcan_topic" default="/canros/msg/phoenix_msgs/RemoteControl" unless="$(arg manual_drive)"/>
     <arg name="drive_state_topic" default="/canros/msg/phoenix_msgs/DriveState"/>
     <arg name="line_detection_debug_image_topic" default="/line_detection_debug_image"/>
     <arg name="trajectory_generation_debug_image_topic" default="/trajectory_generation_debug_image"/>
@@ -28,11 +35,6 @@
     <arg name="obstacle_viz_topic" default="/obstacle_marker_viz"/>
     <arg name="intersection_viz_out" default="/intersection_viz"/>
     <arg name="sign_viz_topic" default="/sign_viz"/>
-
-    <arg name="simulation" default="true"/>
-    <arg name="new_controller" default="false"/>
-    <arg name="bag_testing" default="false"/>
-    <arg name="use_visual_odometry" default="false"/>
     
     <arg name="static_frame" default="base_link"/>  <!-- odom for real car -->
     <arg name="moving_frame" default="rear_axis_middle_ground"/>
@@ -180,9 +182,24 @@
         </include>
     </group>
 
+    <group if="$(arg manual_drive)">
+        <arg name="twist_topic" value="/cmd_twist"/>
+        <node name="keyboard_teleop" pkg="teleop_twist_keyboard" type="teleop_twist_keyboard.py" respawn="false" output="screen">
+            <remap from="cmd_vel" value="$(arg twist_topic)"/>
+        </node>
+
+        <include file="$(find drive_ros_gazebo_control)/launch/twist_to_remote_control.launch">
+            <arg name="manual" value="false" unless="$(arg manual_drive)"/>
+            <arg name="manual" value="true" if="$(arg manual_drive)"/>
+            <arg name="twist_topic" value="$(arg twist_topic)"/>
+            <arg name="remote_control_out" value="$(arg uavcan_topic)"/>
+        </include>
+    </group>
+
     <group if="$(arg simulation)">
         <include file="$(find drive_ros_gazebo_control)/launch/gazebo_body_control.launch">
-            <arg name="manual" value="false"/>
+            <arg name="manual" value="false" unless="$(arg manual_drive)"/>
+            <arg name="manual" value="true" if="$(arg manual_drive)"/>
             <arg name="command_in" value="$(arg uavcan_topic)"/>
         </include>
     </group>
