@@ -52,3 +52,6 @@
 [submodule "modules/darknet_ros_msgs"]
 	path = modules/darknet_ros_msgs
 	url = https://github.com/tum-phoenix/darknet_ros_msgs.git
+[submodule "modules/drive_ros_parking_controller"]
+	path = modules/drive_ros_parking_controller
+	url = https://github.com/tum-phoenix/drive_ros_parking_controller.git
