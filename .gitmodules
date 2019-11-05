@@ -55,3 +55,6 @@
 [submodule "modules/drive_ros_parking_controller"]
 	path = modules/drive_ros_parking_controller
 	url = https://github.com/tum-phoenix/drive_ros_parking_controller.git
+[submodule "modules/drive_ros_homography_publisher"]
+	path = modules/drive_ros_homography_publisher
+	url = https://github.com/tum-phoenix/drive_ros_homography_publisher.git
