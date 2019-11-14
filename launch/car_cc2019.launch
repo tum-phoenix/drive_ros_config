@@ -3,8 +3,8 @@
     <arg name="realsense_camera_name" default="realsense"/>
 
     <arg name="vehicle" default="cc2019_car"/>
-    <arg name="ximea_camera" default="camera"/>
-    <arg name="homography_topic" default="/$(arg ximea_camera)/camera_homography"/>
+    <arg name="tis_camera" default="camera"/>
+    <arg name="homography_topic" default="/$(arg tis_camera)/camera_homography"/>
     <arg name="visual_odometry_topic" default="/visual_odom/odom" />
     <arg name="scan_topic" default="/scan"/>
     <arg name="laser_obstacles_topic" default="/laser_obstacles"/>
@@ -42,7 +42,7 @@
 
     <group unless="$(arg bag_testing)">
         <include file="$(find drive_ros_cc2019_car)/launch/sensor_drivers.launch">
-            <arg name="camera_name" value="$(arg ximea_camera)"/>
+            <arg name="camera_name" value="$(arg tis_camera)"/>
             <arg name="homography_topic" value="$(arg homography_topic)"/>
             <arg name="scan_topic" value="$(arg scan_topic)"/>
             <arg name="vehicle" value="$(arg vehicle)"/>
@@ -50,8 +50,8 @@
     </group>
 
     <include file="$(find drive_ros_cc2019_car)/launch/visual_processing.launch">
-        <arg name="camera" value="$(arg ximea_camera)"/>
-        <arg name="homography_topic" value="/$(arg ximea_camera)/camera_homography"/>
+        <arg name="camera" value="$(arg tis_camera)"/>
+        <arg name="homography_topic" value="/$(arg tis_camera)/camera_homography"/>
         <arg name="odometry_topic" value="$(arg visual_odometry_topic)"/>
         <arg name="driving_line_topic" value="$(arg driving_line_topic)"/>
         <arg name="intersection_topic" value="$(arg intersection_topic)"/>
