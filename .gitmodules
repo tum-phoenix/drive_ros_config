@@ -1,0 +1,21 @@
+[submodule "modules/drive_ros_msgs"]
+	path = modules/drive_ros_msgs
+	url = https://github.com/tum-phoenix/drive_ros_msgs.git
+[submodule "modules/drive_ros_sim_em_stubs"]
+	path = modules/drive_ros_sim_em_stubs
+	url = https://github.com/tum-phoenix/drive_ros_sim_em_stubs.git
+[submodule "modules/drive_ros_trajectory_generator"]
+	path = modules/drive_ros_trajectory_generator
+	url = https://github.com/tum-phoenix/drive_ros_trajectory_generator.git
+[submodule "modules/drive_ros_sim_vehicle_model"]
+	path = modules/drive_ros_sim_vehicle_model
+	url = https://github.com/tum-phoenix/drive_ros_sim_vehicle_model.git
+[submodule "modules/drive_ros_trajectory_tracking_control"]
+	path = modules/drive_ros_trajectory_tracking_control
+	url = https://github.com/tum-phoenix/drive_ros_trajectory_tracking_control.git
+[submodule "modules/drive_ros_uavcan"]
+	path = modules/drive_ros_uavcan
+	url = https://github.com/tum-phoenix/drive_teensy_main.githttps://github.com/tum-phoenix/drive_ros_uavcan.git
+[submodule "modules/drive_teensy_main"]
+	path = modules/drive_teensy_main
+	url = https://github.com/tum-phoenix/drive_teensy_main.git
