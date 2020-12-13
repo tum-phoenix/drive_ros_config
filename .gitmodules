@@ -15,7 +15,10 @@
 	url = https://github.com/tum-phoenix/drive_ros_trajectory_tracking_control.git
 [submodule "modules/drive_ros_uavcan"]
 	path = modules/drive_ros_uavcan
-	url = https://github.com/tum-phoenix/drive_teensy_main.githttps://github.com/tum-phoenix/drive_ros_uavcan.git
+	url = https://github.com/tum-phoenix/drive_ros_uavcan.git
 [submodule "modules/drive_teensy_main"]
 	path = modules/drive_teensy_main
 	url = https://github.com/tum-phoenix/drive_teensy_main.git
+[submodule "lib/kalman"]
+	path = lib/kalman
+	url = https://github.com/tum-phoenix/kalman.git
