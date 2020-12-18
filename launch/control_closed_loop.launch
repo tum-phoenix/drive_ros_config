@@ -1,0 +1,8 @@
+<launch>
+        <arg name="output" default="screen"/>
+
+        <node name="em_stub" pkg="drive_ros_sim_em_stubs" type="em_stub.py" respawn="false" output="$(arg output)"/>
+        <include file="$(find drive_ros_trajectory_tracking_control)/launch/trajectory_tracking_controller.launch"/>
+        <node name="simple_vehicle_model" pkg="drive_ros_sim_vehicle_model" type="single_track_vehicle_model.py" respawn="false" output="$(arg output)"/>
+        <node name="vehicle_model_plotter" pkg="drive_ros_sim_vehicle_model" type="vehicle_model_plotter.py" respawn="false" output="$(arg output)"/>
+</launch>
