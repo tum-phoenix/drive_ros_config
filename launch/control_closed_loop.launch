@@ -1,6 +1,6 @@
 <launch>
         <arg name="output" default="screen"/>
-        <param name="cycletime" type="double" value="0.1" />
+        <param name="cycletime" type="double" value="0.2" />
 
         <node name="em_stub" pkg="drive_ros_sim_em_stubs" type="em_stub.py" respawn="false" output="$(arg output)"/>
         <include file="$(find drive_ros_trajectory_tracking_control)/launch/trajectory_tracking_controller.launch"/>
