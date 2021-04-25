@@ -61,6 +61,6 @@
 [submodule "modules/drive_ros_trajectory_tracking_control"]
 	path = modules/drive_ros_trajectory_tracking_control
 	url = https://github.com/tum-phoenix/drive_ros_trajectory_tracking_control.git
-[submodule "modules/drive_ros_tiscamera_driver"]
-	path = modules/drive_ros_tiscamera_driver
-	url = https://github.com/tum-phoenix/drive_ros_tiscamera_driver.git
+[submodule "modules/ueye_cam"]
+	path = modules/ueye_cam
+	url = https://github.com/tum-phoenix/ueye_cam.git
