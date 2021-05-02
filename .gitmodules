@@ -46,9 +46,6 @@
 [submodule "modules/driver_common"]
 	path = modules/driver_common
 	url = https://github.com/ros-drivers/driver_common.git
-[submodule "modules/drive_ros_sign_detection"]
-	path = modules/drive_ros_sign_detection
-	url = https://github.com/tum-phoenix/drive_ros_sign_detection.git
 [submodule "modules/drive_teensy_main"]
     path = modules/drive_teensy_main
     url = https://github.com/tum-phoenix/drive_teensy_main.git
