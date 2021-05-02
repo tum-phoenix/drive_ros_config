@@ -58,3 +58,9 @@
 [submodule "modules/ueye_cam"]
 	path = modules/ueye_cam
 	url = https://github.com/tum-phoenix/ueye_cam.git
+[submodule "modules/--force"]
+	path = modules/--force
+	url = https://github.com/tum-phoenix/drive_ros_homography_publisher.git
+[submodule "modules/drive_ros_homography_publisher"]
+	path = modules/drive_ros_homography_publisher
+	url = https://github.com/tum-phoenix/drive_ros_homography_publisher.git
