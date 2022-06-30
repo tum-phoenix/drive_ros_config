@@ -1,10 +1,26 @@
 <launch>
         <arg name="output" default="screen"/>
-        <param name="cycletime" type="double" value="0.1" />
 
+        <!-- type of controller that should be used, options: PID, MPC_DISCRETE -->
+        <arg name="controller_type" default="PID"/>
+
+        <!-- track name, options: race_track, Nuerburgring, Silverstone, Spa, Shanghai -->
+        <arg name="track" default="Silverstone"/>
+
+        <!-- params -->
+        <param name="cycletime" type="double" value="0.1"/>
+        <param name="track" value="$(arg track)"/>
+
+        <!-- start environment simulation -->
         <node name="em_stub" pkg="drive_ros_sim_em_stubs" type="em_stub.py" respawn="false" output="$(arg output)"/>
-        <include file="$(find drive_ros_trajectory_tracking_control)/launch/trajectory_tracking_controller.launch"/>
-        <!--node name="simple_vehicle_model" pkg="drive_ros_sim_vehicle_model" type="single_track_vehicle_model.py" respawn="false" output="$(arg output)"/-->
-        <!--node name="vehicle_model_plotter" pkg="drive_ros_sim_vehicle_model" type="vehicle_model_plotter.py" respawn="false" output="$(arg output)"/-->
-        <include file="$(find drive_ros_sim_vehicle_model)/launch/simulator.launch"/>
+
+        <!-- start controller -->
+        <include file="$(find drive_ros_trajectory_tracking_control)/launch/trajectory_tracking_controller.launch">
+                <arg name="controller_type" value="$(arg controller_type)"/>
+        </include>
+
+        <!-- start simulator -->
+        <include file="$(find drive_ros_sim_vehicle_model)/launch/simulator.launch">
+                <arg name="track" value="$(arg track)"/>
+        </include>
 </launch>
